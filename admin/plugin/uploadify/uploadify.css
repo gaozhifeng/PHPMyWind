@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+/*全局控制*/
+body{margin:0;padding:0px;font-size:12px;height:100%;}
+html,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,p{margin:0;padding:0;}
+input,select{font-size:12px;}img{border:0;}ul,li{list-style-type:none;}
+
+
+.W{width:100%;height:100%;position:absolute;top:0;left:0;z-index:999;font-family:"宋体";}
+.W .Bg{width:100%;height:100%;position:absolute;top:0;left:0;background:#fff;filter:alpha(opacity=35);-moz-opacity:0.35;opacity:0.35;}
+.W .Wrap{width:490px;position:absolute;background-color:white;border:1px solid #8E8E8E;}
+.W .Wrap:after{content:' ';position:absolute;display:block;left:-5px;top:-5px;z-index:-1;width:100%;height:100%;border:5px solid transparent;border-color:rgba(51, 51, 51, 0.1);border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
+
+.W .Title{cursor:move;overflow:hidden;}
+.W .MainTit{padding:0 15px;height:35px;line-height:37px;overflow:hidden;font-size:14px;font-weight:bold;color:#000;border-bottom:1px solid #C8DDE9;background:#E7F2F9;background:-webkit-gradient(linear,0 0,0 100%,from(#F3F8FC),to(#E7F2F9));background:-moz-linear-gradient(top,#F3F8FC,#E7F2F9);filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,startColorStr=#FFF3F8FC,endColorStr=#FFE7F2F9);}
+.W .Close{width:16px;height:16px;position:absolute;top:10px;right:10px;background:url(close_div.gif) no-repeat;}
+.W .Close:hover{background:url(close_div.gif) no-repeat right top;}
+
+.W .Cont{padding:0 15px 5px;}
+.W .Note{margin:12px 0;line-height:22px;color:#999;word-break:break-all;}
+.W .Note strong{font-family:Verdana;padding:0 2px;font-weight:200;color:#09F;}
+.W .btnBox{text-align:right;padding:10px 0;}
+.W .btnBox .browser{float:left;color:#666;}
+.W .flashWrap{position:relative;}
+.W .flashWrap span{position:absolute;top:9px;*top:5px;left:140px;color:#999;}
+.W .flashWrap span a{color:#09F;text-decoration:none;}
+.W .flashWrap span i{font-style:normal;padding:0 9px;font-family:Verdana;color:#ccc;}
+.W .flashWrap span input{vertical-align:middle;margin-right:5px;}
+.W .flashWrap span label{vertical-align:middle;}
+.W .fileWarp{width:460px;min-height:240px;padding-top:10px;_height:auto!important;_height:240px;}
+.W .fileWarp fieldset{min-height:214px;padding:0 12px 8px;border:1px solid #c8dde9;_height:auto!important;_height:214px;}
+.W .fileWarp legend{color:#9ec1d5;padding:3px 8px;font-weight:bold;}
+
+.W .fileWarp ul{padding-top:8px;}
+.W .fileWarp ul li.img{width:100px;padding:0 4px;float:left;}
+.W .fileWarp ul li.img a{color:#09F;line-height:20px;*line-height:22px;}
+.W .fileWarp ul li.img .txt{width:94px;height:20px;padding:0 2px;border:1px solid #ccc;}
+.W .fileWarp ul li.file{border-bottom:1px dashed #ccc;font:12px Verdana;padding:10px;width:412px;}
+.W .fileWarp ul li.file a{float:right;width:16px;height:16px;background:url(cancel.png) no-repeat;font-size:0;text-indent:999px;overflow:hidden;}
+
+.W .btn{width:72px;height:24px;background:url(btn.gif) no-repeat;font-size:14px;border:0;cursor:pointer;}
+.W #fileQueue{clear:both;}
+
+.W .uploadify-queue-item{background-color:#F5F5F5;border:1px solid #E5E5E5; font:12px Verdana, Geneva, sans-serif;padding:10px;width:412px;margin-bottom:5px;}
+.W .uploadify-queue-item .cancel a{float:right;display:block;width:16px;height:16px;background:url('uploadify-cancel.png') 0 0 no-repeat;overflow:hidden;text-indent:-9999px;}
+.W .uploadify-queue-item .completed{background-color:#E5E5E5;}
+.W .uploadify-progress{background-color:#E5E5E5;margin-top:10px;width:100%;}
+.W .uploadify-progress-bar{background-color:#0099FF;height:3px;width:1px;}
+.W .uploadify-error{background-color:#FDE5DD !important;border:1px solid #FBCBBC !important;}

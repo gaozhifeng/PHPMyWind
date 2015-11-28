@@ -1,0 +1,66 @@
+<?php require_once(dirname(__FILE__).'/inc/config.inc.php'); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>RewriteURL 规则</title>
+<style type="text/css">
+body{font-size:13px;line-height:22px;font-family:Verdana;padding:0 0 20px 0;}
+html,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,p{margin:0;padding:0;}
+.cl{clear:both;}
+.note{text-align:right;padding:10px;}
+.note h1{color:#458FCE;font-size:24px;float:left;line-height:36px;}
+.note p{float:right;color:#999;line-height:18px;font-size:12px;font-family:"微软雅黑";}
+.main{padding:10px;}
+.main h2{font-size:18px;line-height:24px;}
+.main span{font-size:12px;}
+.main pre{margin:20px 0;font-family:Verdana;border-top:2px solid #458FCE;border-bottom:1px solid #DBECEC;background:#fbfbfb;padding:10px;}
+.copyright{text-align:center;font-size:12px;color:#666;}
+</style>
+</head>
+<body>
+<div class="note">
+	<h1>RewriteURL 规则</h1>
+	<p>以下规则为系统按设置自动生成<br />
+		您也可以自行修改以满足需求</p>
+	<div class="cl"></div>
+</div>
+<div class="main">
+	<h2>Apache Web Server(独立主机用户)</h2>
+	<span>复制规则粘贴到 Apache配置文件conf/httpd.conf 最后即可</span>
+	<pre>
+&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On<br />{apache}&lt;/IfModule&gt;</pre>
+	<h2>Apache Web Server(虚拟主机用户)</h2>
+	<span>复制规则粘贴到记事本，保存为.htaccess文件，存放在在根目录即可</span>
+	<pre># 将 RewriteEngine 模式打开
+RewriteEngine On
+
+# 修改以下语句中的 / 改为您的系统目录地址，如果程序放在根目录中则无需修改
+RewriteBase {webpath}
+
+# Rewrite 系统规则请勿修改<br />{apache2}</pre>
+	<h2>IIS Web Server(独立主机用户)</h2>
+	<span>复制规则粘贴到httpd.ini即可</span>
+	<pre># 将 RewriteEngine 模式打开
+[ISAPI_Rewrite]
+
+# 3600 = 1 hour
+CacheClockRate 3600
+
+RepeatLimit 32
+
+# Protect httpd.ini and httpd.parse.errors files
+# from accessing through HTTP<br />{iis}</pre>
+	<h2>IIS7 Web Server(独立主机用户)</h2>
+	<span>复制规则粘贴到记事本，保存为web.config文件，存放在在根目录即可</span>
+	<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br />&lt;configuration&gt;<br />&lt;system.webServer&gt;<br />&lt;!--伪静态开始--&gt;<br />&lt;rewrite&gt;<br />&lt;rules&gt;<br />{iis7}&lt;/rules&gt;<br />&lt;/rewrite&gt;<br />&lt;!--伪静态结束--&gt;<br />&lt;directoryBrowse enabled=&quot;true&quot; showFlags=&quot;Date, Time, Size, Extension, LongDate&quot; /&gt;<br />&lt;/system.webServer&gt;<br />&lt;/configuration&gt;</pre>
+	<h2>Nginx Web Server</h2>
+	<span>复制规则粘贴到nginx.conf或虚拟主机段的根目录</span>
+	<pre>{nginx}if (!-e $request_filename) {
+	return 404;
+}</pre>
+</div>
+<div class="copyright">© 2015 phpMyWind.com All Rights Reserved.</div>
+</body>
+</html>

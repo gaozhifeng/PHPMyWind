@@ -1,0 +1,27 @@
+PHPMyWind 产品使用说明
+
+
+一、平台需求
+1.Windows 平台：
+IIS/Apache/Nginx + PHP5.2+/PHP5.3+ + MySQL4/5
+
+2.Linux/Unix 平台
+Apache + PHP5 + MySQL5 (PHP必须在非安全模式下运行)
+
+3.PHP环境容易碰到的不兼容性问题
+  (1)data目录没写入权限，导致系统session无法使用，这将导致无法登录管理后台（直接表现为验证码不能正常显示）；
+  (2)php的上传的临时文件夹没设置好或没写入权限，这会导致文件上传的功能无法使用；
+  (3)出现莫名的错误，如安装时显示空白，这样能是由于系统没装载mysql扩展导致的，对于初级用户，可以下载php套件包，以方便简单的使用。
+
+
+二、程序安装使用
+1.下载程序解压到本地目录;
+2.上传程序目录到网站根目录
+3.运行http://www.yourname.com/install/index.php(yourname表示你的域名),按照安装提速说明进行程序安装
+
+
+三、相关资源
+PHPMyWind 官方主站       http://phpmywind.com
+PHPMyWind 官方论坛       http://phpmywind.com/bbs
+PHPMyWind 新浪微博       http://weibo.com/phpmywind
+PHPMyWind 腾讯微博       http://t.qq.com/phpmywind

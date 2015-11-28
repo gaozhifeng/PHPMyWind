@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网站信息配置</title>
+<link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templates/js/jquery.min.js"></script>
+<script type="text/javascript" src="plugin/colorpicker/colorpicker.js"></script>
+<script type="text/javascript">
+function tabs(tabobj, obj)
+{
+	$("#"+tabobj+" li[id^="+tabobj+"]").each(function(i){
+		if(tabobj+"_title"+i == obj.id)
+		{
+			$("#"+tabobj+"_title"+i).attr("class","on");
+			$("#"+tabobj+"_content"+i).show();
+		}
+		else
+		{
+			$("#"+tabobj+"_title"+i).attr("class","");
+			$("#"+tabobj+"_content"+i).hide();
+		}
+	});
+}
+
+function UserThisLoginBg(str)
+{
+	if(str == ""){
+		$("#cfg_loginbgimg").val("");
+		$("#loginbgimg_prew").attr("src","templates/images/nologinbg.jpg");
+	}else{
+		$("#cfg_loginbgimg").val(str);
+		$("#loginbgimg_prew").attr("src",str);
+	}
+}
+
+function DelThisLoginBg(str)
+{
+	$.ajax({
+		url : "ajax_do.php?action=delloginbg&delloginbg="+str,
+		type: 'get',
+		dataType:'html',
+		beforeSend:function(){},
+		success:function(data){
+			if(data){
+				$("div[rel='"+str+"']").remove();
+			}
+		}
+	});
+}
+</script>
+</head>
+<body>
+<div class="topToolbar"> <span class="title">网站信息配置</span> <a href="javascript:location.reload();" class="reload">刷新</a></div>
+<div class="toolbarTab">
+	<ul id="tabs">
+		<?php
+		foreach($config_tab_arr as $config_tab_id=>$config_tab_text)
+		{
+			echo '<li id="tabs_title'.$config_tab_id.'" onclick="tabs(\'tabs\',this);" class="';
+			if($config_tab_id == 0) echo 'on';
+			echo '"><a href="javascript:;">'.$config_tab_text.'</a></li><li class="line">-</li>';	
+		}
+		?>
+		<li id="tabs_title<?php echo $config_tab_num; ?>" onclick="tabs('tabs',this);"><a href="javascript:;">水印设置</a></li>
+		<li class="line">-</li>
+		<li id="tabs_title<?php echo $config_tab_num+1; ?>" onclick="tabs('tabs',this);"><a href="javascript:;">界面设置</a></li>
+		<li class="line">-</li>
+		<li id="tabs_title<?php echo $config_tab_num+2; ?>" onclick="tabs('tabs',this);"><a href="javascript:;">增加新变量</a></li>
+	</ul>
+</div>
+<!--cfg_var-->
+<form name="form_cfg_var" method="post" action="">
+	<?php
+	foreach($config_tab_arr as $config_tab_id=>$config_tab_text)
+	{
+	?>
+	<div class="<?php if($config_tab_id != 0) echo 'undis'; ?>" id="tabs_content<?php echo $config_tab_id; ?>"> 
+		<!--使用DIV兼容chrome firefox等浏览器-->
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="formTable" >
+			<?php
+			
+			if($config_tab_id == 0)
+				$sql = "SELECT * FROM `#@__webconfig` WHERE `siteid`='$cfg_siteid' AND `vargroup`=$config_tab_id ORDER BY `orderid` ASC";
+			else
+				$sql = "SELECT * FROM `#@__webconfig` WHERE vargroup=$config_tab_id ORDER BY orderid ASC";
+
+			$dosql->Execute($sql);
+			$i = 1;
+			while($row = $dosql->GetArray())
+			{
+			?>
+			<tr <?php if($i == $dosql->GetTotalRow()) echo 'class="nb"'; ?>>
+				<td width="25%" height="40" align="right"><?php echo $row['varinfo']; ?>：</td>
+				<td width="40%"><?php
+				
+				//统计代码转义
+				if($row['varname'] == 'cfg_countcode')
+				{
+					$row['varvalue'] = stripslashes($row['varvalue']);
+				}
+				
+				switch($row['vartype'])
+				{
+					case 'string':
+						echo '<input type="text" name="'.$row['varname'].'" id="'.$row['varname'].'" value="'.$row['varvalue'].'" class="input" />';
+					break;
+
+					case 'number':
+						echo '<input type="text" name="'.$row['varname'].'" id="'.$row['varname'].'" value="'.$row['varvalue'].'" class="input" style="width:120px;" />';
+					break;
+
+					case 'bool':
+						if($row['varvalue'] == 'Y')
+						{
+							$checked_y = 'checked="checked"';
+							$checked_n = '';
+						}
+						else
+						{
+							$checked_n = 'checked="checked"';
+							$checked_y = '';
+						}
+						echo '<input type="radio" name="'.$row['varname'].'" id="'.$row['varname'].'" value="Y" '.$checked_y.' /> 是 &nbsp;';
+						echo '<input type="radio" name="'.$row['varname'].'" id="'.$row['varname'].'" value="N" '.$checked_n.' /> 否';
+					break;
+
+					case 'bstring':
+						echo '<textarea name="'.$row['varname'].'" id="'.$row['varname'].'" class="textarea" style="margin:7px 0;">'.htmlspecialchars($row['varvalue']).'</textarea>';
+					break;
+
+					default:
+					echo '没有获取到类型';
+					break;
+				}
+				?></td>
+				<td width="35%"><span class="siteSetTag">$<?php echo $row['varname']; ?></span></td>
+			</tr>
+			<?php
+			    if($config_tab_id==3 and $i==$dosql->GetTotalRow())
+				{
+					echo '<tr class="nb"><td height="40">&nbsp;</td><td><a href="rewriteurl.php" target="_blank" style="text-decoration:underline;">生成伪静态规则 (如修改过规则，请先提交保存)</a></td></tr>';
+				}
+
+				$i++;
+			}
+			?>
+			<tr class="nb">
+				<td width="25%" height="40" align="right">&nbsp;</td>
+				<td width="40%">多站点状态下各站只区分基本设置项，其他设置多站共享</td>
+				<td width="35%">&nbsp;</td>
+			</tr>
+			<tr class="nb">
+				<td colspan="3"><div class="formSubBtn">
+					<input type="submit" class="submit" value="提交" />
+					<input type="button" class="back" value="返回" onclick="history.go(-1);" />
+					<input type="hidden" name="action" id="action" value="update" />
+				</div></td>
+			</tr>
+		</table>
+	</div>
+	<?php
+	}
+	?>
+</form>
+<!--/cfg_var end--> 
+<!--setwatermark-->
+<?php
+require_once($watermark_inc);
+?>
+<form name="form_watermark" method="post" action="">
+	<div class="undis" id="tabs_content<?php echo $config_tab_num; ?>">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="formTable">
+			<tr>
+				<td width="25%" height="40" align="right">是否开启水印：</td>
+				<td width="75%"><input type="radio" name="cfg_markswitch" id="cfg_markswitch" value="Y" <?php if($cfg_markswitch == 'Y'){echo 'checked="checked"';} ?> />
+					启用 &nbsp;
+					<input type="radio" name="cfg_markswitch" id="cfg_markswitch" value="N" <?php if($cfg_markswitch == 'N'){echo 'checked="checked"';} ?> />
+					关闭</td>
+			</tr>
+			<tr>
+				<td width="25%" height="40" align="right">水印添加条件：</td>
+				<td width="75%">宽&nbsp;
+					<input type="text" name="cfg_markminwidth" id="cfg_markminwidth" value="<?php echo $cfg_markminwidth; ?>" class="input" style="width:50px;" />
+					px&nbsp;&nbsp;高&nbsp;
+					<input type="text" name="cfg_markminheight" id="cfg_markminheight" value="<?php echo $cfg_markminheight; ?>" class="input" style="width:50px;" />
+					px </td>
+			</tr>
+			<tr>
+				<td width="25%" height="40" align="right">水印类型：</td>
+				<td width="75%"><input name="cfg_marktype" type="radio" id="cfg_marktype" value="0" onclick="document.getElementById('watermarkimgarea').style.display='block';document.getElementById('watermarktextarea').style.display='none';" <?php if($cfg_marktype == '0') echo 'checked="checked"'; ?> />
+					图片 &nbsp;
+					<input type="radio" name="cfg_marktype" id="cfg_marktype" value="1" onclick="document.getElementById('watermarkimgarea').style.display='none';document.getElementById('watermarktextarea').style.display='block';" <?php if($cfg_marktype == '1') echo 'checked="checked"'; ?> />
+					文字</td>
+			</tr>
+			<tr>
+				<td height="40" colspan="2"><div id="watermarkimgarea" <?php if($cfg_marktype == '0'){echo 'style="display:block"';}else{echo 'style="display:none"';} ?>>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="formTable">
+							<tr>
+								<td width="25%" height="40" align="right">水印预览：</td>
+								<td width="75%"><img src="<?php echo '../'.$cfg_markpicurl; ?>" id="watermark_prew" />
+									<input name="cfg_markpicurl" type="hidden" id="cfg_markpicurl" value="<?php echo $cfg_markpicurl; ?>" /></td>
+							</tr>
+							<tr class="nb">
+								<td width="25%" height="40" align="right">上传水印：</td>
+								<td><iframe style="top:2px" src="upload_imagefile.php?fn=watermarket" frameborder="0" scrolling="no" width="100%" height="22"></iframe></td>
+							</tr>
+						</table>
+					</div>
+					<div id="watermarktextarea" <?php if($cfg_marktype == '1'){echo 'style="display:block"';}else{echo 'style="display:none"';} ?>>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="formTable">
+							<tr>
+								<td width="25%" height="40" align="right">水印文字：</td>
+								<td width="75%"><input name="cfg_marktext" type="text" id="cfg_marktext" class="input" value="<?php echo $cfg_marktext; ?>" style="color:<?php echo $cfg_markcolor; ?>;" /></td>
+							</tr>
+							<tr>
+								<td height="40" align="right">文字颜色：</td>
+								<td><input name="cfg_markcolor" type="text" id="cfg_markcolor" class="input" value="<?php echo $cfg_markcolor; ?>" />
+									&nbsp;&nbsp;
+									<div class="titlePanel"> <span onclick="colorpicker('colorpanel','cfg_markcolor','cfg_marktext');" class="color" title="水印颜色"> </span> <span id="colorpanel"></span> </div></td>
+							</tr>
+							<tr class="nb">
+								<td height="40" align="right">文字大小：</td>
+								<td><input name="cfg_marksize" type="text" id="cfg_marksize" class="input" value="<?php echo $cfg_marksize; ?>" />
+									<span class="cnote">最大字号为25号</span></td>
+							</tr>
+						</table>
+					</div></td>
+			</tr>
+			<tr>
+				<td width="25%" height="40" align="right">水印位置：</td>
+				<td width="75%"><input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="1" <?php if($cfg_markwhere == '1') echo 'checked="checked"'; ?> />
+					左上
+					&nbsp;
+					<input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="2" <?php if($cfg_markwhere == '2') echo 'checked="checked"'; ?> />
+					中上
+					&nbsp;
+					<input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="3" <?php if($cfg_markwhere == '3') echo 'checked="checked"'; ?> />
+					右上</td>
+			</tr>
+			<tr>
+				<td width="25%" height="40" align="right">&nbsp;</td>
+				<td width="75%"><input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="4" <?php if($cfg_markwhere == '4') echo 'checked="checked"'; ?> />
+					左中
+					&nbsp;
+					<input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="5" <?php if($cfg_markwhere == '5') echo 'checked="checked"'; ?> />
+					中间
+					&nbsp;
+					<input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="6" <?php if($cfg_markwhere == '6') echo 'checked="checked"'; ?> />
+					右中</td>
+			</tr>
+			<tr>
+				<td width="25%" height="40" align="right">&nbsp;</td>
+				<td width="75%"><input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="7" <?php if($cfg_markwhere == '7') echo 'checked="checked"'; ?> />
+					左下
+					&nbsp;
+					<input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="8" <?php if($cfg_markwhere == '8') echo 'checked="checked"'; ?> />
+					中下
+					&nbsp;
+					<input name="cfg_markwhere" type="radio" id="cfg_markwhere" value="9" <?php if($cfg_markwhere == '9') echo 'checked="checked"'; ?> />
+					右下</td>
+			</tr>
+			<tr class="nb">
+				<td width="25%" height="40" align="right">&nbsp;</td>
+				<td width="75%"><input type="radio" name="cfg_markwhere" id="cfg_markwhere" value="0" <?php if($cfg_markwhere == '0') echo 'checked="checked"'; ?> />
+					随机</td>
+			</tr>
+			<tr class="nb">
+				<td colspan="2">
+					<div class="formSubBtn">
+					<input type="submit" class="submit" value="提交" />
+					<input type="button" class="back" value="返回" onclick="history.go(-1);" />
+					<input type="hidden" name="action" id="action" value="update_wmk" />
+				</div></td>
+			</tr>
+		</table>
+	</div>
+</form>
+<!--/setwatermark end--> 
+<!--setui-->
+<?php
+require_once($manageui_inc);
+?>
+<form name="form_manageui" method="post" action="">
+	<div class="undis" id="tabs_content<?php echo $config_tab_num+1; ?>">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="formTable">
+			<tr class="nb">
+				<td width="25%" height="40" align="right">登录背景预览：</td>
+				<td width="75%" class="loginBgList">
+					<?php
+					if(!empty($cfg_loginbgimg))
+						$dfloginbg = $cfg_loginbgimg;
+					else
+						$dfloginbg = 'templates/images/nologinbg.jpg';
+					?>
+					<div><img src="<?php echo $dfloginbg; ?>" id="loginbgimg_prew" width="244" style="margin-bottom:7px;" /></div>
+					<input name="cfg_loginbgimg" type="hidden" id="cfg_loginbgimg" class="input" value="<?php echo $cfg_loginbgimg; ?>" /></td>
+			</tr>
+			<tr>
+				<td height="40" align="right">&nbsp;</td>
+				<td><iframe style="top:2px" src="upload_imagefile.php?fn=manageloginbg" frameborder="0" scrolling="no" width="100%" height="22"></iframe></td>
+			</tr>
+			<tr>
+				<td height="40" align="right">图片背景选择：</td>
+				<td class="loginBgList">
+				<?php
+
+				//设置读取目录
+				$dir = ADMIN_TEMP.'/images/loginbg';
+
+				//打开文件夹
+				if(is_dir($dir))
+				{
+					$handler = opendir($dir);
+
+					while(($filename = readdir($handler)) !== false)
+					{
+						if($filename != '.' && $filename != '..' && !is_dir($dir.$filename))
+						{
+							$loginBg = 'templates/images/loginbg/'.$filename;
+							echo '<div rel="'.$loginBg.'"><span class="selimg"><a href="javascript:;" onclick="UserThisLoginBg(\''.$loginBg.'\')"><img src="'.$loginBg.'" width="244" /></a></span><a href="javascript:;" onclick="UserThisLoginBg(\''.$loginBg.'\')">使用</a> - <a href="javascript:;" onclick="DelThisLoginBg(\''.$loginBg.'\')">删除</a></div>';
+						}
+					}
+					closedir($handler);
+				}
+				?>
+				<div><span class="selimg"><a href="javascript:;" onclick="UserThisLoginBg('')"><img src="templates/images/nologinbg.jpg" width="244" /></a></span><a href="javascript:;" onclick="UserThisLoginBg('')">使用</a></div></td>
+			</tr>
+			<tr>
+				<td height="40" align="right">背景颜色选择：</td>
+				<td><input name="cfg_loginbgcolor" type="text" id="cfg_loginbgcolor" class="input" value="<?php echo $cfg_loginbgcolor; ?>" style="color:<?php echo $cfg_loginbgcolor; ?>;" />
+					&nbsp;&nbsp;
+					<div class="titlePanel">&nbsp;<span onclick="colorpicker('colorpanel2','cfg_loginbgcolor','cfg_loginbgcolor');" class="color" title="水印颜色"> </span> <span id="colorpanel2"></span> </div></td>
+			</tr>
+			<tr>
+				<td height="40" align="right">图片背景重复：</td>
+				<td><input type="radio" name="cfg_loginbgrepeat" id="cfg_loginbgrepeat" value="0" <?php if($cfg_loginbgrepeat == '0') echo 'checked="checked"'; ?> />
+					不平铺
+					&nbsp;
+					<input type="radio" name="cfg_loginbgrepeat" id="cfg_loginbgrepeat" value="1" <?php if($cfg_loginbgrepeat == '1') echo 'checked="checked"'; ?> />
+					横向平铺
+					&nbsp;
+					<input type="radio" name="cfg_loginbgrepeat" id="cfg_loginbgrepeat" value="2" <?php if($cfg_loginbgrepeat == '2') echo 'checked="checked"'; ?> />
+					竖向平铺</td>
+			</tr>
+			<tr class="nb">
+				<td height="40" align="right">图片背景对齐：</td>
+				<td><input type="radio" name="cfg_loginbgpos" id="cfg_loginbgpos" value="0" <?php if($cfg_loginbgpos == '0') echo 'checked="checked"'; ?> />
+					左对齐
+					&nbsp;
+					<input type="radio" name="cfg_loginbgpos" id="cfg_loginbgpos" value="1" <?php if($cfg_loginbgpos == '1') echo 'checked="checked"'; ?> />
+					居中对齐
+					&nbsp;
+					<input type="radio" name="cfg_loginbgpos" id="cfg_loginbgpos" value="2" <?php if($cfg_loginbgpos == '2') echo 'checked="checked"'; ?> />
+					右对齐</td>
+			</tr>
+			<tr class="nb">
+				<td colspan="2">
+					<div class="formSubBtn">
+					<input type="submit" class="submit" value="提交" />
+					<input type="button" class="back" value="返回" onclick="history.go(-1);" />
+					<input type="hidden" name="action" id="action" value="update_manageui" />
+				</div></td>
+			</tr>
+		</table>
+	</div>
+</form>
+<!--/setui end--> 
+<!--addvarname-->
+<form name="form_addvarname" method="post" action="">
+	<div class="undis" id="tabs_content<?php echo $config_tab_num+2; ?>">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="formTable">
+			<tr>
+				<td width="25%" height="40" align="right">变量名称：</td>
+				<td width="75%"><input type="text" name="varname" id="varname" value="" class="input" />
+					<span class="maroon">*</span><span class="cnote">系统会自动为变量添加 '$cfg_' 前缀</span></td>
+			</tr>
+			<tr>
+				<td height="40" align="right">参数说明：</td>
+				<td><input type="text" name="varinfo" id="varinfo" value="" class="input" />
+					<span class="maroon">*</span></td>
+			</tr>
+			<tr>
+				<td height="40" align="right">变量值：</td>
+				<td><input type="text" name="varvalue" id="varvalue" value="" class="input" /></td>
+			</tr>
+			<tr>
+				<td height="40" align="right">变量类型：</td>
+				<td><input type="radio" name="vartype" value="string" checked="checked" />
+					文本&nbsp;
+					<input type="radio" name="vartype"  value="number" />
+					数字&nbsp;
+					<input type="radio" name="vartype" value="bool" />
+					布尔(Y/N)&nbsp;
+					<input type="radio" name="vartype" value="bstring" />
+					多行文本 </td>
+			</tr>
+			<tr class="nb">
+				<td height="40" align="right">所属组：</td>
+				<td><?php
+					echo '<select name="vargroup">';
+					foreach($config_tab_arr as $vargroup_id => $vargroup)
+					{
+						echo '<option value='.$vargroup_id.'>'.$vargroup.'</option>';
+					}
+					echo '</select>';
+					?></td>
+			</tr>
+			<tr class="nb">
+				<td colspan="2"><div class="formSubBtn">
+					<input type="submit" class="submit" value="提交" />
+					<input type="button" class="back" value="返回" onclick="history.go(-1);" />
+					<input type="hidden" name="action" id="action" value="add" />
+				</div></td>
+			</tr>
+		</table>
+	</div>
+</form>
+<!--/addvarname end-->
+</body>
+</html>

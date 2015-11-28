@@ -1,0 +1,145 @@
+<!--This is IE DTD patch , Don't delete this line.-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Page-Enter" content="blendTrans(Duration=0.3)" />
+<meta http-equiv="Page-Exit" content="blendTrans(Duration=0.3)" />
+<title><?php echo $cfg_webname; ?> - PHPMyWind 管理中心</title>
+<link href="templates/style/frame.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templates/js/jquery.min.js"></script>
+<script type="text/javascript" src="templates/js/frame.js"></script>
+<script type="text/javascript">
+<?php
+
+$fdir  = PHPMYWIND_DATA.'/cache/auth/';
+$fname = 'auth_'.$cfg_auth_key.'.php';
+
+
+
+if(file_exists($fdir.$fname))
+{
+	echo 'url = "'.$_SERVER['HTTP_HOST'].'";';
+
+
+	//获取缓存时间
+	$fMkTime = filemtime($fdir.$fname);
+
+
+	//检测缓存最后更新时间
+	if($fMkTime + 21600 < time())
+	{
+		echo 'GetAuth();';
+	}
+	else
+	{
+		//开始验证
+		$jsonStr = json_decode(stripslashes(Readf($fdir.$fname)));
+
+		if($jsonStr->doname != $_SERVER['HTTP_HOST'])
+			echo 'GetAuth();';
+		else if($jsonStr->status == 'OK')
+			echo '$(function(){$(".authUser").show();})';
+		else
+			echo '$(function(){$(".authUser").hide();})';
+	}
+}
+else
+{
+	echo 'url = "'.$_SERVER['HTTP_HOST'].'";';
+	echo 'GetAuth();';
+}
+
+?>
+</script>
+</head>
+<body>
+<div class="header">
+	<a href="javascript:;" id="logo" class="logo"></a>
+	<div class="user">
+		<span class="name">Hi, <?php echo $_SESSION['admin']; ?></span>
+		<div class="userPanel">
+			<a href="javascript:;" class="arrow"></a>
+			<div class="panel" <?php if(empty($_SESSION['t_adminlevel'])) echo 'style="min-height:158px;"'; ?>>
+				<div class="warp">
+					<div class="txt">您是尊贵的<?php $r = $dosql->GetOne("SELECT `groupname` FROM `#@__admingroup` WHERE `id`=".$_SESSION['adminlevel']);echo ($levelname = isset($r['groupname']) ? $r['groupname'] : '未启用的组'); ?></div>
+					<?php
+					if(!empty($_SESSION['t_adminlevel']))
+					{
+					?>
+					<div class="priv"><strong>权限切换</strong><br />
+					<?php
+					$dosql->Execute("SELECT * FROM `#@__admingroup` WHERE `checkinfo`='true' ORDER BY id ASC");
+					while($row = $dosql->GetArray())
+					{
+						echo '<a href="javascript:;" onclick="SelPrivID('.$row['id'].');" title="切换到'.$row['groupname'].'身份">'.ReStrLen($row['groupname'],5).'</a>';
+					}
+					?>
+					</div>
+					<?php
+					}
+					?>
+					<div class="info">
+						<div><strong>本次登录</strong><br /><?php echo MyDate('Y-m-d H:i',$_SESSION['logintime']); ?></div>
+						<div><strong>上次登录</strong><br /><?php echo MyDate('Y-m-d H:i',$_SESSION['lastlogintime']).'&nbsp;&nbsp;'.$_SESSION['lastloginip']; ?></div>
+					</div>
+					<div class="actbtn"><a href="admin_update.php?id=<?php $row = $dosql->GetOne("SELECT `id` FROM `#@__admin` WHERE username='".$_SESSION['admin']."'");echo $row['id'];?>" class="edit" target="main">修改密码</a><a href="logout.php" class="logout">退出(ESC)</a></div>
+				</div>
+			</div>
+		</div>
+		<a href="http://phpmywind.com/auth.php?url=<?php echo $_SERVER['HTTP_HOST']; ?>" class="authUser" title="官方授权" target="_blank"></a>
+	</div>
+	<div class="fun">
+		<div class="siteList">
+		<?php
+		if(IsMobile())
+		{
+		?>
+		<a href="javascript:;" onclick="SelSiteEQ()">[极速版]</a>
+		<?php
+		}
+
+		$dosql->Execute("SELECT * FROM `#@__site` ORDER BY id ASC");
+		if($dosql->GetTotalRow() > 1)
+		{
+			while($row = $dosql->GetArray())
+			{
+				if($_SESSION['siteid'] == $row['id'])
+					$light = 'class="on"';
+				else
+					$light = '';
+
+				echo '<a href="javascript:;" id="'.$row['sitekey'].'" onclick="SelSite(\''.$row['sitekey'].'\')" '.$light.' title="切换到'.$row['sitename'].'">'.$row['sitename'].'</a>';
+			}
+		}
+		?>
+		</div>
+		<a href="../" target="_blank" class="homeLink df" title="网站首页">网站首页</a>
+		<a href="javascript:;" id="lockscreen" class="lockScreen df" title="锁屏">锁屏</a>
+		<a href="home_user.php" target="main" class="quickNav df" title="点击回到系统首页">快捷导航</a>
+		<a href="http://phpmywind.com/" target="_blank" class="webLink df" title="官方网站">官方网站</a>
+	</div>
+</div>
+<div class="left">
+	<div class="menu">
+		<iframe name="menu" id="menu" frameborder="0" src="left_menu_user.php" scrolling="no"></iframe>
+	</div>
+</div>
+<div class="right">
+	<div class="main">
+		<iframe name="main" id="main" frameborder="0" src="home_user.php" <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')) echo 'scrolling="yes"'; ?>></iframe>
+	</div>
+</div>
+<div class="lockScreenBg">
+	<div class="winBox">
+		<div class="pwd">
+			解锁密码：
+			<div><input type="password" name="password" id="password" />
+				<span onclick="CheckPwd()" class="btn">确 定</span></div>
+			<span class="note">&nbsp;</span>
+		</div>
+	</div>
+	<div class="copyright">© 2015 phpMyWind.com</div>
+</div>
+</body>
+</html>

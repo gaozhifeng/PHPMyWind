@@ -1,0 +1,85 @@
+/*
+**************************
+(C)2010-2015 phpMyWind.com
+update: 2013-4-27 16:57:34
+person: Adu
+**************************
+*/
+
+/*通用样式*/
+body{font-family:"微软雅黑";background:#f5f5f5;}
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,p{margin:0;padding:0;}
+img{border:0;}ul,li{list-style-type:none;}
+a{color:#333;outline:none;}
+a,a:visited{text-decoration:none;color:#333;}
+.cl{clear:both;}
+
+
+/*头部区域*/
+.header{width:100%;height:2.8em;line-height:2.8em;background:#608fca;overflow:hidden;}
+.header .logo{text-align:center;font-size:1.5em;font-weight:bold;color:#fff;}
+
+
+
+/*导航区域*/
+.navside{width:100%;}
+.navside ul{margin:5px 0;}
+.navside li{float:left;width:33.3%;line-height:30px;font-size:1em;text-align:center;}
+.navside li span{font-weight:bold;color:#747c86;}
+.navside li span .on{font-weight:bold;color:#2d70c3;}
+
+
+/*主题区域*/
+.pubBox{border-top:solid 2px #5d99e2;}
+
+.pubBox .hd{height:35px;line-height:35px;background:#e9e9e9;border-bottom:solid 1px #dcdcdc;}
+.pubBox .hd h2{width:95%;padding-left:10px;font-size:1.125em;position:relative;text-align:left;font-weight:bold;color:#2d70c3;}
+
+.pubBox .ft{padding:15px;}
+.pubBox .ft .info{line-height:1.6em;color:#333;}
+.pubBox .ft .list li{line-height:2em;border-bottom:solid 1px #eceef0;box-shadow:0 1px 1px #fbfbfb;max-width:100%;text-overflow:ellipsis;white-space:nowrap !important;white-space:normal;overflow:hidden;color:#333;}
+
+.pubBox .ft .img li{float:left;width:33.3%;}
+.pubBox .ft .img li a{border:1px solid #f5f5f5;}
+.pubBox .ft .img li img{}
+
+.pubBox .ft .img2 li{float:left;width:50%;margin-bottom:5px;}
+.pubBox .ft .img2 li a.imgarea{display:block;border:1px solid #f5f5f5;}
+.pubBox .ft .img2 li p{height:40px;overflow:hidden;}
+.pubBox .ft .img2 li p a{color:#333;}
+
+
+.goChannel{height:52px;line-height:52px;text-align:center;}
+.goChannel span{height:22px;line-height:22px;background:url(../images/mobile/icon.png) right 0px no-repeat;background-size:22px 22px;display:inline-block;color:#b3b5b9;padding-right:27px;margin:15px 0;}
+.goChannel span{background:url(../images/mobile/icon_on.png) right 0px no-repeat;background-size:22px 22px;}
+
+
+/*页脚区域*/
+.footer{background:#d3d7db;text-align:center;overflow:hidden;position:relative;}
+.footer .copyRight{padding:10px 15px;line-height:24px;text-align:left;color:#a6aeb6;}
+.footer .topBtn a{width:20px;height:19px;background:url(../images/mobile/top.png) no-repeat;background-size:20px 19px;position:absolute;bottom:10px;right:10px;}
+
+
+/*详细内容*/
+.subCont{margin-top:10px;}
+.subCont .title{font-size:1.5em;line-height:1.2em;text-align:center;}
+.subCont .continfo{width:100%;text-align:center;margin:15px auto;border:1px solid #ccc;border-left:none;border-right:none;color:#666;}
+.subCont .continfo span{color:#999;}
+.subCont .contimg{margin:20px auto;text-align:center;overflow:hidden;display:table;}
+.subCont .contimg a img{border:1px solid #ccc;padding:1px;}
+.subCont .contimg a:hover img{border:1px solid #999;padding:1px;background:#B1D8F3;}
+.subCont .conttxt{color:#333;}
+
+
+/*内容分页*/
+.contPage{height:24px;line-height:24px;text-align:center;letter-spacing:0;font-family:"Arial Black";font-size:10px;margin:20px 0 10px;}
+.contPage a{display:inline-block;color:#898989;border:1px solid #e8e8e8;background:#f8f8f8;text-align:center;padding:0 8px;margin:0 1px;}
+.contPage a.on{color:#fff;border:1px solid #898989;background:#898989;}
+
+
+/*列表分页*/
+.page_info{text-align:center;margin:10px 0;}
+.page_info span{padding:0 2px;font-weight:bold;}
+.page_list{height:24px;line-height:24px;text-align:center;letter-spacing:0;font-family:"Arial Black";font-size:10px;margin:20px 0 10px;}
+.page_list a{display:inline-block;color:#898989;border:1px solid #e8e8e8;background:#f8f8f8;text-align:center;padding:0 8px;margin:0 1px;}
+.page_list a.on{color:#fff;border:1px solid #898989;background:#898989;}

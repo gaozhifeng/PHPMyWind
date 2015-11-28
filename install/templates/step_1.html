@@ -1,0 +1,121 @@
+<?php if(!defined('IN_INSTALL')) exit('Request Error!'); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PHPMyWind 安装向导 - 检测安装环境</title>
+<link href="templates/style/install.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="templates/js/jquery.min.js"></script>
+<script type="text/javascript" src="templates/js/common.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="mainBody">
+	<div class="forms">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr align="left" class="head">
+				<td width="30%" height="36">项目</th>
+				<td width="30%">所需配置</th>
+				<td width="15%">推荐配置</th>
+				<td width="25%" align="right">当前服务器</th>
+			</tr>
+			<tr>
+				<td height="26" class="firstCol">操作系统</td>
+				<td>不限制</td>
+				<td>类Unix</td>
+				<td class="endCol"><?php echo PHP_OS; ?></td>
+			</tr>
+			<tr>
+				<td height="26" class="firstCol">PHP 版本</td>
+				<td>5.0</td>
+				<td>5.2</td>
+				<td class="endCol"><?php echo PHP_VERSION; ?></td>
+			</tr>
+			<tr>
+				<td height="26" class="firstCol">附件上传</td>
+				<td>不限制</td>
+				<td>2M</td>
+				<td class="endCol"><?php echo get_cfg_var("upload_max_filesize") ? get_cfg_var("upload_max_filesize") : '不允许上传附件'; ?></td>
+			</tr>
+			<tr>
+				<td height="26" class="firstCol">GD 库</td>
+				<td>1.0</td>
+				<td>2.0</td>
+				<td class="endCol"><?php
+				$tmp = function_exists('gd_info') ? gd_info() : array();
+				@$env_items[$key]['current'] = empty($tmp['GD Version']) ? 'noext' : $tmp['GD Version'];
+				echo @$env_items[$key]['current'];
+				unset($tmp);
+				?></td>
+			</tr>
+			<tr>
+				<td height="26" class="firstCol">磁盘空间</td>
+				<td>10M</td>
+				<td>不限制</td>
+				<td class="endCol"><?php
+				if(function_exists('disk_free_space')) {
+					@$env_items[$key]['current'] = floor(disk_free_space('../') / (1024*1024)).'M';
+				}
+				else{
+					$env_items[$key]['current'] = 'unknow';
+				}
+				echo @$env_items[$key]['current'];
+				?></td>
+			</tr>
+		</table>
+		<div class="hr_10"></div>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr align="left" class="head">
+				<td width="60%" height="36">目录文件</th>
+				<td width="25%">所需状态</th>
+				<td width="15%" align="right">当前状态</th>
+			</tr>
+			<?php
+			foreach($iswrite_array as $v)
+			{
+			?>
+			<tr align="left">
+				<td height="26" class="firstCol"><?php echo $v; ?></td>
+				<td>可写</td>
+				<td class="endCol"><?php IsWrite('../'.$v); ?></td>
+			</tr>
+			<?php
+			}
+			?>
+		</table>
+		<div class="hr_10"></div>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr align="left" class="head">
+				<td width="60%" height="36">函数名称</th>
+				<td width="25%">检查结果</th>
+				<td width="15%" align="right">建议</th>
+			</tr>
+			<?php
+			foreach($exists_array as $v)
+			{
+			?>
+			<tr>
+				<td height="26" class="firstCol"><?php echo $v; ?>()</td>
+				<td><?php IsFunExists($v); ?></td>
+				<td class="endCol"><?php IsFunExistsTxt($v); ?></td>
+			</tr>
+			<?php
+			}
+			?>
+		</table>
+	</div>
+</div>
+<div class="footer"> <span class="step2"></span> <span class="copyright"><?php echo $cfg_copyright; ?></span> <span class="formSubBtn">
+	<form name="form" method="post" action="index.php" >
+		<a href="javascript:void(0);" onclick="history.go(-1);return false;" class="back">返 回</a>
+		<?php
+		if(isset($isnext) && $isnext != 'N')
+			echo '<a href="javascript:void(0);" onclick="form.submit();return false;" class="submit">下一步</a>';
+		else
+			echo '<a href="javascript:void(0);" class="submit">请修复</a>';
+		?>
+		<input type="hidden" name="s" id="s" value="2">
+	</form>
+	</span> </div>
+</body>
+</html>

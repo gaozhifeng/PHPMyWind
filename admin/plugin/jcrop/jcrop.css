@@ -1,0 +1,98 @@
+@charset "utf-8";
+
+
+/*全局控制*/
+body{margin:0;padding:0px;font-size:12px;height:100%;font-family:"微软雅黑", Arial;}
+html,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,p{margin:0;padding:0;}
+input,select{font-size:12px;vertical-align:middle;}img{border:0;}ul,li{list-style-type:none;}
+
+
+/*背景样式*/
+.W{width:100%;height:100%;position:absolute;top:0;left:0;z-index:999;}
+.W .Bg{width:100%;height:100%;position:absolute;top:0;left:0;background:#fff;filter:alpha(opacity=35);-moz-opacity:0.35;opacity:0.35;}
+
+
+/*窗口样式*/
+.jcorp_pop .board{background:url(board.gif);}
+.jcorp_pop .jcorp_warp{max-height:600px;background:url(board.gif);text-align:center;overflow-x:auto;overflow-y:auto;}
+.jcorp_pop{position:absolute;width:600px;left:50%;margin-left:-310px;z-index:999;background:#fff;border:1px solid #8E8E8E;padding:10px;}
+.jcorp_pop:after{content:' ';position:absolute;display:block;left:-5px;top:-5px;z-index:-1;width:100%;height:100%;border:5px solid transparent;border-color:rgba(51, 51, 51, 0.1);border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
+.jcorp_pop .jcorp_par{margin:12px 0;}
+.jcorp_pop .jcorp_par label{padding-right:8px;}
+.jcorp_pop .jcorp_btn{text-align:right;}
+.jcorp_pop .jcorp_btn .txt{float:left;line-height:24px;color:#adcadb;}
+.jcorp_pop .jcorp_btn .btn{display:inline-block;width:72px;height:24px;line-height:24px;background:url(btn.gif) no-repeat;font-size:14px;cursor:pointer;text-align:center;font-family:"宋体";overflow:hidden;}
+.jcorp_pop .jcorp_txt{width:40px;height:18px;line-height:18px;background:url(txt_bg.png) repeat-x;border:1px solid #d0d0d0;text-align:center;margin:0 3px;}
+.jcorp_pop img#target{max-width:600px;_width:auto!important;_width:600px;}
+
+
+/*裁切样式*/
+.jcrop-holder{direction:ltr;text-align:left;}
+
+/* These styles define the border lines */
+.jcrop-vline,.jcrop-hline{background:#FFF url(Jcrop.gif) top left repeat;font-size:0;position:absolute;}
+.jcrop-vline{height:100%;width:1px!important;}
+.jcrop-hline{height:1px!important;width:100%;}
+.jcrop-vline.right{right:0;}
+.jcrop-hline.bottom{bottom:0;}
+
+/* Handle style - size is set by Jcrop handleSize option (currently) */
+.jcrop-handle{background-color:#333;border:1px #eee solid;font-size:1px;}
+
+/* This style is used for invisible click targets */
+.jcrop-tracker
+{
+  height: 100%; 
+  width: 100%;
+  -webkit-tap-highlight-color: transparent; /* "turn off" link highlight */
+  -webkit-touch-callout: none;              /* disable callout, image save panel */
+  -webkit-user-select: none;                /* disable cut copy paste */
+}
+
+/* Positioning of handles and drag bars */
+.jcrop-handle.ord-n{left:50%;margin-left:-4px;margin-top:-4px;top:0;}
+.jcrop-handle.ord-s{bottom:0;left:50%;margin-bottom:-4px;margin-left:-4px;}
+.jcrop-handle.ord-e{margin-right:-4px;margin-top:-4px;right:0;top:50%;}
+.jcrop-handle.ord-w{left:0;margin-left:-4px;margin-top:-4px;top:50%;}
+.jcrop-handle.ord-nw{left:0;margin-left:-4px;margin-top:-4px;top:0;}
+.jcrop-handle.ord-ne{margin-right:-4px;margin-top:-4px;right:0;top:0;}
+.jcrop-handle.ord-se{bottom:0;margin-bottom:-4px;margin-right:-4px;right:0;}
+.jcrop-handle.ord-sw{bottom:0;left:0;margin-bottom:-4px;margin-left:-4px;}
+.jcrop-dragbar.ord-n,.jcrop-dragbar.ord-s{height:7px;width:100%;}
+.jcrop-dragbar.ord-e,.jcrop-dragbar.ord-w{height:100%;width:7px;}
+.jcrop-dragbar.ord-n{margin-top:-4px;}
+.jcrop-dragbar.ord-s{bottom:0;margin-bottom:-4px;}
+.jcrop-dragbar.ord-e{margin-right:-4px;right:0;}
+.jcrop-dragbar.ord-w{margin-left:-4px;}
+
+/* The "jcrop-light" class/extension */
+.jcrop-light .jcrop-vline,.jcrop-light .jcrop-hline
+{
+	background:#FFF;
+	filter:Alpha(opacity=70)!important;
+	opacity:.70!important;
+}
+.jcrop-light .jcrop-handle
+{
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	background-color:#000;
+	border-color:#FFF;
+	border-radius:3px;
+}
+
+/* The "jcrop-dark" class/extension */
+.jcrop-dark .jcrop-vline,.jcrop-dark .jcrop-hline
+{
+	background:#000;
+	filter:Alpha(opacity=70)!important;
+	opacity:.7!important;
+}
+.jcrop-dark .jcrop-handle
+{
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	background-color:#FFF;
+	border-color:#000;
+	border-radius:3px;
+}

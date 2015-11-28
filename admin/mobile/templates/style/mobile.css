@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+/*
+**************************
+(C)2010-2015 phpMyWind.com
+update: 2014-6-21 12:44:56
+person: Feng
+**************************
+*/
+
+
+
+
+/*全局控制*/
+body{margin:0;padding:0;background:#f6f6f6;font-family:"微软雅黑",Arial,"宋体";font-size:12px;color:#333;}
+html,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,p{margin:0;padding:0;}
+input,select,textarea{font-size:12px;font-family:Arial;vertical-align:middle;}img{border:0;}ul,li{list-style-type:none;}
+a{color:#333;text-decoration:none;}a:hover{text-decoration:underline;}a:focus{outline:none;}
+.tc{text-align:center;}.tl{text-align:left;}.tr{text-align:right;}
+.dis{display:block;}.undis{display:none;}
+.rela{position:relative;}.abso{position:absolute;}
+.fl{float:left;}.fr{float:right;}.cl{clear:both;}.fb{font-weight:bold;color:#333;}.fnb{font-weight:200;margin-left:-1px;}
+.hr_1,.hr_5,.hr_10,.hr_20{font-size:1px;line-height:1px;clear:both;_overflow:hidden;}
+.hr_1{height:1px;}.hr_5{height:5px;}.hr_10{height:10px;}.hr_20{height:20px;}
+
+
+/*定义新型浏览器特性*/
+input:focus{outline:none;}
+
+
+/*登录样式*/
+.loginWarp{position:relative;padding:20px 20px 0;}
+.loginWarp .loginLogo{height:60px;line-height:60px;margin-bottom:20px;padding-left:75px;background:url(../images/logo.png) no-repeat;font-size:2em;}
+.loginWarp .loginForm .txtLine{position:relative;background:#fff;}
+.loginWarp .loginForm .txtLine label{position:absolute;top:16px;left:45px;font-size:1.125em;color:#ccc;}
+.loginWarp .loginForm .asLine{position:relative;float:right;width:55%;height:45px;}
+.loginWarp .loginForm .asLine label{position:absolute;top:16px;left:5px;font-size:1.125em;color:#ccc;}
+.loginWarp .loginForm .input{width:99.8%;height:45px;text-indent:45px;border:1px solid #ccc;border-bottom:0;font-weight:bold;font-size:14px;}
+.loginWarp .loginForm .uname{background:url(../images/loginTxtBg.png) no-repeat 12px 14px;border-radius:5px 5px 0 0;}
+.loginWarp .loginForm .pwd{background:url(../images/loginTxtBg.png) no-repeat 13px -50px;border-radius:0;}
+.loginWarp .loginForm .quesArea{width:99.8%;height:45px;border:1px solid #ccc;background:#fff;border-radius:0 0 5px 5px;}
+.loginWarp .loginForm .answer{width:100%;height:45px;text-indent:5px;float:right;border:0;background:url(../images/tran.gif);font-weight:bold;font-size:14px;}
+.loginWarp .loginForm .question{width:35%;border:0;float:left;margin:13px 0 0 14px;}
+.loginWarp .loginForm .loginBtn{width:99.8%;height:45px;line-height:45px;margin-top:30px;border:1px solid #ffba00;background:#ffba00;text-align:center;font-family:"微软雅黑";font-size:20px;color:#fff;cursor:pointer;border-radius:5px;}
+.loginWarp .loginCopyright{width:100%;margin:50px 0 20px;text-align:center;font-family:Verdana;font-size:1.2em;color:#c4c4c4;}
+
+
+/*头部区域*/
+.header{height:60px;line-height:60px;border-bottom:1px solid #1b5983;background:#509ee1;position:relative;}
+.header .user{position:absolute;left:15px;top:0;}
+.header .user .name{float:left;font-family:Verdana;font-size:20px;color:#fff;}
+.header .txt{position:absolute;top:0;right:10px;color:#fff;}
+.header .txt a{color:#fff;padding:0 5px;font-size:14px;}
+
+.nav{margin-bottom:20px;padding:0 15px;background:#fff;}
+.nav li{width:20%;float:left;margin-bottom:-2px;text-align:left;font-size:1.25em;}
+.nav li a{display:inline-block;line-height:35px;}
+.nav li.on a{border-bottom:2px solid #509ee1;}
+
+
+
+.homeSite{margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #ddd;}
+.homeSite td{white-space:nowrap;}
+.homeSite span.ture,.homeSite span.flase{line-height:28px;display:inline-block;padding-left:12px;background:url(../images/filestate.png) no-repeat;text-indent:8px;}
+.homeSite span.ture{background-position:0 6px;}
+.homeSite span.flase{background-position:0 -18px;}
+
+.homeEvent{margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #ddd;}
+.homeEvent li{height:30px;line-height:28px;white-space:nowrap;overflow:hidden;}
+
+.homeCount{margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #ddd;}
+
+
+
+.footer{height:35px;line-height:35px;padding:15px 0 10px;text-align:center;font-size:1.125em;color:#999;}
+
+
+.mobileBody{padding:0 15px 10px;}
+.mobileBody h2{margin-bottom:5px;}
+.blue{color:blue;}

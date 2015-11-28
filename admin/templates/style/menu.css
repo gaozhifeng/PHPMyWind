@@ -1,0 +1,96 @@
+@charset "utf-8";
+
+/*
+**************************
+(C)2010-2015 phpMyWind.com
+update: 2014-5-23 13:45:48
+person: Feng
+**************************
+*/
+
+
+/*全局控制*/
+body{margin:0;padding:0;line-height:22px;background:#fafafa;font-family:"微软雅黑",Arial,"宋体";font-size:12px;overflow:hidden;-webkit-text-size-adjust:none;}
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,p{margin:0;padding:0;}
+img{border:0;}ul,li{list-style-type:none;}
+a{color:#005590;text-decoration:none;}
+a:hover{text-decoration:none;}
+a:focus{outline:none;}
+.tc{text-align:center;}.tl{text-align:left;}.tr{text-align:right;}
+.undis{display:none;}
+.hr_1,.hr_5{width:128px;margin:0 auto;font-size:1px;line-height:1px;clear:both;_overflow:hidden;}
+.hr_1{height:1px;background:#ccc;border-bottom:1px solid #fff;}.hr_5{height:5px;}
+
+
+
+/*快捷按钮*/
+.quickBtn{width:190px;height:30px;margin:20px auto 18px;}
+.quickBtn a{display:block;background:url(../images/leftNavBg.png) no-repeat;font-family:"微软雅黑";font-size:16px;color:#b5b5b5;}
+.quickBtn a{transition-duration:300ms;}
+.quickBtn a:hover{background:url(../images/leftNavBg.png) no-repeat;}
+
+.quickBtnLeft,.quickBtnRight{width:80px;line-height:30px;text-align:right;}
+.quickBtnLeft{float:left;}
+.quickBtnLeft a{background-position:0 5px;}
+.quickBtnLeft a:hover{background-position:0 -25px;}
+.quickBtnRight{float:right;}
+.quickBtnRight a{background-position:0 -56px;}
+.quickBtnRight a:hover{background-position:0 -86px;}
+
+
+
+/*菜单盒子*/
+.menubox{width:190px;margin:0 auto;position:relative;}
+.menubox .title{width:160px;padding-left:32px;line-height:32px;font-weight:bold;color:#333;cursor:pointer;}
+.menubox .on{background:url(../images/leftNavBg.png) no-repeat 0 -120px;}
+.menubox a{display:block;padding-left:32px;line-height:27px;color:#bfbfbf;}
+.menubox a:hover{color:#333;}
+.menubox a{transition-duration:300ms;}
+
+
+
+/*标记图标*/
+.menubox a.admingroup,.menubox a.infoattr,.menubox a.infosrc,.menubox a.usertype,.menubox a.adtype,.menubox a.weblinktype,.menubox a.goodsinfoattr{position:absolute;right:6px;display:block;width:6px;height:8px;padding:0;background:url(../images/leftNavBg.png) no-repeat 0 -153px;overflow:hidden;z-index:999;}
+.menubox a:hover.admingroup,.menubox a:hover.infoattr,.menubox a:hover.infosrc,.menubox a:hover.usertype,.menubox a:hover.adtype,.menubox a:hover.weblinktype,.menubox a:hover.goodsinfoattr{background:url(../images/leftNavBg.png) no-repeat 0 -153px;}
+.menubox a.admingroup{top:42px;}
+.menubox a.infoattr{top:125px;}
+.menubox a.infosrc{top:152px;}
+.menubox a.usertype{top:42px;}
+.menubox a.adtype{top:152px;}
+.menubox a.weblinktype{top:179px;}
+.menubox a.goodsinfoattr{top:98px;}
+
+
+
+/*导航条*/
+#scrollmenu{width:190px;margin:0 auto;}
+#scrollmenu .viewport{width:190px;position:relative;}
+#scrollmenu .overview{list-style:none;position:absolute;left:0;top:0;padding:0;margin:0;}
+#scrollmenu .scrollbar{width:8px;position:relative;float:right;margin-right:-8px}
+#scrollmenu .thumb{background:url(../images/scrbar_thumb.png) no-repeat 50% 100%;width:6px;width:7px\0;*width:13px!important;_width:13px;height:20px;cursor:pointer;overflow:hidden;position:absolute;top:0;left:0px;}
+#scrollmenu .thumb .end{background:url(../images/scrbar_thumb.png) no-repeat 50% 0;overflow:hidden;width:6px;width:7px\0;*width:13px!important;_width:13px;height:5px;}
+#scrollmenu .disable{display:none;}
+#scrollmenu .thumb{transition-duration:300ms;}
+#scrollmenu .thumb:hover{background:url(../images/scrbar_thumb_on.png) no-repeat 50% 100%;}
+#scrollmenu .thumb:hover .end{background:url(../images/scrbar_thumb_on.png) no-repeat 50% 0;}
+
+
+
+/*上下遮罩*/
+.tGradient{display:none;position:absolute;left:13px;top:62px;width:190px;height:15px;overflow:hidden;background:-moz-linear-gradient(top,#fafafa,rgba(250,250,250,0));background:-webkit-gradient(linear,left top,left bottom,from(#fafafa),to(rgba(250,250,250,0)));background:#fafafa\9;filter:alpha(opacity=100 finishopacity=0 style=1 startx=0,starty=0,finishx=0,finishy=100);z-index:999;}
+.bGradient{display:none;position:absolute;left:13px;bottom:64px;width:190px;height:15px;overflow:hidden;background:-moz-linear-gradient(bottom,#fafafa,rgba(250,250,250,0));background:-webkit-gradient(linear,left bottom,left top,from(#fafafa),to(rgba(250,250,250,0)));background:#fafafa\9;filter:alpha(opacity=100 finishopacity=0 style=1 startx=0,starty=100,finishx=0,finishy=0);z-index:999;}
+
+
+
+/*选项卡切换*/
+.tabMenu{width:33px;height:19px;position:absolute;right:3px;bottom:17px;}
+.tabMenu a{display:block;width:33px;height:19px;}
+.tabMenu a.model{background:url(../images/leftMenuType.png);}
+.tabMenu a.name{background:url(../images/leftMenuType.png) 0 bottom;}
+
+
+
+/*版权区域*/
+.copyright{width:100%;position:absolute;left:0;bottom:18px;text-align:center;line-height:20px;font-family:Verdana;color:#bfbfbf;}
+.copyright span{text-decoration:underline;}
+.copyright a{color:#bfbfbf;}

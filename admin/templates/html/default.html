@@ -1,0 +1,312 @@
+<!--This is IE DTD patch , Don't delete this line.-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Page-Enter" content="blendTrans(Duration=0.3)" />
+<meta http-equiv="Page-Exit" content="blendTrans(Duration=0.3)" />
+<title><?php echo $cfg_webname; ?> - PHPMyWind 管理中心</title>
+<link href="templates/style/frame.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templates/js/jquery.min.js"></script>
+<script type="text/javascript" src="templates/js/frame.js"></script>
+<script type="text/javascript">
+<?php
+
+$fdir  = PHPMYWIND_DATA.'/cache/auth/';
+$fname = 'auth_'.$cfg_auth_key.'.php';
+
+
+
+if(file_exists($fdir.$fname))
+{
+	echo 'url = "'.$_SERVER['HTTP_HOST'].'";';
+
+
+	//获取缓存时间
+	$fMkTime = filemtime($fdir.$fname);
+
+
+	//检测缓存最后更新时间
+	if($fMkTime + 21600 < time())
+	{
+		echo 'GetAuth();';
+	}
+	else
+	{
+		//开始验证
+		$jsonStr = json_decode(stripslashes(Readf($fdir.$fname)));
+
+		if($jsonStr->doname != $_SERVER['HTTP_HOST'])
+			echo 'GetAuth();';
+		else if($jsonStr->status == 'OK')
+			echo '$(function(){$(".authUser").show();})';
+		else
+			echo '$(function(){$(".authUser").hide();})';
+	}
+}
+else
+{
+	echo 'url = "'.$_SERVER['HTTP_HOST'].'";';
+	echo 'GetAuth();';
+}
+
+?>
+</script>
+</head>
+<body>
+<div class="header">
+	<a href="javascript:;" id="logo" class="logo"></a>
+	<div class="user">
+		<span class="name">Hi, <?php echo $_SESSION['admin']; ?></span>
+		<div class="userPanel">
+			<a href="javascript:;" class="arrow"></a>
+			<div class="panel">
+				<div class="warp">
+					<div class="txt">您是尊贵的<?php $r = $dosql->GetOne("SELECT `groupname` FROM `#@__admingroup` WHERE `id`=".$_SESSION['adminlevel']);echo ($levelname = isset($r['groupname']) ? $r['groupname'] : '未启用的组'); ?></div>
+					<div class="priv"><strong>权限切换</strong><br />
+					<?php
+					$dosql->Execute("SELECT * FROM `#@__admingroup` WHERE `checkinfo`='true' ORDER BY id ASC");
+					while($row = $dosql->GetArray())
+					{
+						echo '<a href="javascript:;" onclick="SelPrivID('.$row['id'].');" title="切换到'.$row['groupname'].'身份">'.ReStrLen($row['groupname'],5).'</a>';
+					}
+					?>
+					</div>
+					<div class="info">
+						<div><strong>本次登录</strong><br /><?php echo MyDate('Y-m-d H:i',$_SESSION['logintime']); ?></div>
+						<div><strong>上次登录</strong><br /><?php echo MyDate('Y-m-d H:i',$_SESSION['lastlogintime']).'&nbsp;&nbsp;'.$_SESSION['lastloginip']; ?></div>
+					</div>
+					<div class="actbtn"><a href="admin_update.php?id=<?php $row = $dosql->GetOne("SELECT `id` FROM `#@__admin` WHERE username='".$_SESSION['admin']."'");echo $row['id'];?>" class="edit" target="main">修改密码</a><a href="logout.php" class="logout">退出(ESC)</a></div>
+				</div>
+			</div>
+		</div>
+		<a href="http://phpmywind.com/auth.php?url=<?php echo $_SERVER['HTTP_HOST']; ?>" class="authUser" title="官方授权" target="_blank"></a>
+	</div>
+	<div class="fun">
+		<div class="siteList">
+		<?php
+		if(IsMobile())
+		{
+		?>
+		<a href="javascript:;" onclick="SelSiteEQ()">[极速版]</a>
+		<?php
+		}
+
+		$dosql->Execute("SELECT * FROM `#@__site` ORDER BY id ASC");
+		if($dosql->GetTotalRow() > 1)
+		{
+			while($row = $dosql->GetArray())
+			{
+				if($_SESSION['siteid'] == $row['id'])
+					$light = 'class="on"';
+				else
+					$light = '';
+
+				echo '<a href="javascript:;" id="'.$row['sitekey'].'" onclick="SelSite(\''.$row['sitekey'].'\')" '.$light.' title="切换到'.$row['sitename'].'">'.$row['sitename'].'</a>';
+			}
+		}
+		?>
+		</div>
+		<a href="../" target="_blank" class="homeLink df" title="网站首页">网站首页</a>
+		<a href="javascript:;" id="lockscreen" class="lockScreen df" title="锁屏">锁屏</a>
+		<div class="quick"> <a href="home.php" target="main" class="quickNav df" title="快捷导航&#10;点击回到系统首页">快捷导航</a>
+			<div class="quickmenu">
+				<div class="warp">
+					<div class="col">
+						<div class="mapitem"><strong>网站系统管理</strong>
+							<dl>
+								<dt>[系统功能]</dt>
+								<dd>
+									<ul>
+										<li><a href="admin.php" target="main">管理员管理</a></li>
+										<li><a href="admingroup.php" target="main">管理组管理</a></li>
+										<li><a href="site.php" target="main">站点配置管理</a></li>
+										<li><a href="web_config.php" target="main">网站信息配置</a></li>
+										<li><a href="upload_filemgr_sql.php" target="main">上传文件管理</a></li>
+										<li><a href="database_backup.php" target="main">数据库管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+								<dt>[自定义功能]</dt>
+								<dd>
+									<ul>
+										<li><a href="diymodel.php" target="main">自定义模型</a></li>
+										<li><a href="diyfield.php" target="main">自定义字段</a></li>
+										<li><a href="cascade.php" target="main">级联数据管理</a></li>
+										<li><a href="fragment.php" target="main">碎片数据管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+						<div class="mapitem"><strong>系统辅助功能</strong>
+							<dl>
+								<dt>[辅助功能]</dt>
+								<dd>
+									<ul>
+										<li><a href="sysevent.php" target="main">操作日志</a></li>
+										<li><a href="syscount.php" target="main">数据统计</a></li>
+										<li><a href="upload_file.php" target="main">上传新文件</a></li>
+										<li><a href="check_bom.php" target="main" class="bom">BOM检查</a></li>
+										<li><a href="help.php" target="main">开发帮助</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col">
+						<div class="mapitem"><strong>栏目内容管理</strong>
+							<dl>
+								<dt>[栏目类别]</dt>
+								<dd>
+									<ul>
+										<li><a href="infoclass.php" target="main">栏目管理</a></li>
+										<li><a href="maintype.php" target="main">二级分类管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+								<dt>[内容管理]</dt>
+								<dd>
+									<ul>
+										<li><a href="info.php" target="main">单页信息管理</a></li>
+										<li><a href="infolist.php" target="main">列表信息管理</a></li>
+										<li><a href="infoimg.php" target="main">图片信息管理</a></li>
+										<li><a href="soft.php" target="main">软件信息管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+						<div class="mapitem"><strong>模块扩展管理</strong>
+							<dl>
+								<dt>[模块管理]</dt>
+								<dd>
+									<ul>
+										<li><a href="adtype.php" target="main">广告位管理</a></li>
+										<li><a href="admanage.php" target="main">广告模块管理</a></li>
+										<li><a href="weblinktype.php" target="main">友情类别管理</a></li>
+										<li><a href="weblink.php" target="main">友情链接管理</a></li>
+										<li><a href="message.php" target="main">留言模块管理</a></li>
+										<li><a href="job.php" target="main">招聘模块管理</a></li>
+										<li><a href="vote.php" target="main">投票模块管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col">
+						<div class="mapitem"><strong>商品订单管理</strong>
+							<dl>
+								<dt>[类别属性]</dt>
+								<dd>
+									<ul>
+										<li><a href="goodstype.php" target="main">商品类别管理</a></li>
+										<li><a href="goodsbrand.php" target="main">品牌类型管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+								<dt>[商品管理]</dt>
+								<dd>
+									<ul>
+										<li><a href="goods.php" target="main">商品列表管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+								<dt>[订单支付]</dt>
+								<dd>
+									<ul>
+										<li><a href="goodsorder.php" target="main">订单列表管理</a></li>
+										<li><a href="postmode.php" target="main">配送方式管理</a></li>
+										<li><a href="paymode.php" target="main">支付方式管理</a></li>
+										<li><a href="getmode.php" target="main">货到方式管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+						<div class="mapitem"><strong>标记信息管理</strong>
+							<dl>
+								<dt>[属性来源]</dt>
+								<dd>
+									<ul>
+										<li><a href="infoflag.php" target="main">信息标记管理</a></li>
+										<li><a href="goodsflag.php" target="main">商品信息属性</a></li>
+										<li><a href="infosrc.php" target="main">来源信息管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col">
+						<div class="mapitem"><strong>用户模块管理</strong>
+							<dl>
+								<dt>[用户管理]</dt>
+								<dd>
+									<ul>
+										<li><a href="member.php" target="main">用户管理</a></li>
+										<li><a href="usergroup.php" target="main">用户组管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+								<dt>[用户操作]</dt>
+								<dd>
+									<ul>
+										<li><a href="usercomment.php" target="main">用户评论管理</a></li>
+										<li><a href="userfavorite.php" target="main">用户收藏管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+						<div class="mapitem"><strong>界面模板管理</strong>
+							<dl>
+								<dt>[导航管理]</dt>
+								<dd>
+									<ul>
+										<li><a href="nav.php" target="main">导航菜单管理</a></li>
+										<li><a href="diymenu.php" target="main">自定义菜单项</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+								<dt>[界面管理]</dt>
+								<dd>
+									<ul>
+										<li><a href="mobile.php" target="main">手机网站设置</a></li>
+										<li><a href="editfile.php" target="main">默认模板管理</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="cl"></div>
+				</div>
+			</div>
+		</div>
+		<a href="http://phpmywind.com/" target="_blank" class="webLink df" title="官方网站">官方网站</a>
+	</div>
+</div>
+<div class="left">
+	<div class="menu">
+		<iframe name="menu" id="menu" frameborder="0" src="left_menu.php" scrolling="no"></iframe>
+	</div>
+</div>
+<div class="right">
+	<div class="main">
+		<iframe name="main" id="main" frameborder="0" src="home.php" <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')) echo 'scrolling="yes"'; ?>></iframe>
+	</div>
+</div>
+<div class="lockScreenBg">
+	<div class="winBox">
+		<div class="pwd">
+			解锁密码：
+			<div><input type="password" name="password" id="password" />
+				<span onclick="CheckPwd()" class="btn">确 定</span></div>
+			<span class="note">&nbsp;</span>
+		</div>
+	</div>
+	<div class="copyright">© 2015 phpMyWind.com</div>
+</div>
+</body>
+</html>

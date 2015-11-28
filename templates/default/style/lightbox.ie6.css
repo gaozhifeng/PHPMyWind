@@ -1,0 +1,81 @@
+@charset "utf-8";
+.jquery-lightbox-border-top-left
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat 0 0;
+}
+
+.jquery-lightbox-border-top-right
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat right 0;
+}
+
+.jquery-lightbox-border-bottom-left
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat 0 bottom;
+}
+
+.jquery-lightbox-border-bottom-right
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat right bottom;
+}
+
+
+.jquery-lightbox-button-close
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -190px -115px;
+}
+
+.jquery-lightbox-button-close:hover
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -220px -115px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-buttons-init
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -151px -153px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-buttons-end
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -244px -153px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-button-left
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -156px -153px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-button-left:hover
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -156px -194px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-button-right
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -220px -153px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-button-right:hover
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -220px -194px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-button-max
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -182px -153px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-button-max:hover
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -182px -194px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-button-min
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -162px -235px;
+}
+
+.jquery-lightbox-buttons .jquery-lightbox-button-min:hover
+{
+  background: url(../images/jquery-lightbox-theme.gif) no-repeat -207px -235px;
+}

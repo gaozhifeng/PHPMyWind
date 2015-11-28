@@ -1,0 +1,24 @@
+<?php if(!defined('IN_INSTALL')) exit('Request Error!'); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PHPMyWind 安装向导 - 程序已安装</title>
+<link href="templates/style/install.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="templates/js/jquery.min.js"></script>
+<script type="text/javascript" src="templates/js/common.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="mainBody">
+	<div class="note">
+		<div class="already"><strong>现在您可以：</strong><br />
+			<a href="../">访问网站首页</a><span>或</span><a href="../admin/login.php">登录后台</a><br />
+			<br />
+			如重新安装，请删除/data文件夹下install_lock.txt文件<br />
+			您可以登录 <a href="http://phpmywind.com/" target="_blank" class="link">phpmywind.com</a> 获取更多帮助 </div>
+	</div>
+</div>
+<div class="footer"> <span class="step4"></span> <span class="copyright"><?php echo $cfg_copyright; ?></span></div>
+</body>
+</html>
