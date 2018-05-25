@@ -249,7 +249,7 @@ else if($s == 3)
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_seotitle','SEO标题','0','string','','6');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_keyword','关键字设置','0','string','','7');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_description','网站描述','0','bstring','','8');
-			INSERT INTO `#@__webconfig` VALUES('1','cfg_copyright','版权信息','0','bstring','Copyright © 2010 - 2015 phpMyWind.com All Rights Reserved','9');
+			INSERT INTO `#@__webconfig` VALUES('1','cfg_copyright','版权信息','0','bstring','Copyright © 2015 - 2018 phpMyWind.com All Rights Reserved','9');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_hotline','客服热线','0','string','400-800-8888','10');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_icp','备案编号','0','string','','11');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_webswitch','启用站点','0','bool','Y','12');
