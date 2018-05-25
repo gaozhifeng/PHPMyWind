@@ -865,6 +865,7 @@ else if($a == 'perfect')
 	$password   = empty($password)   ? '' : md5(md5($password));
 	$repassword = empty($repassword) ? '' : md5(md5($repassword));
 	$email      = empty($email)      ? '' : $email;
+    $sql        = '';
 
 
 	//验证输入数据

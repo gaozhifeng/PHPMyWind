@@ -27,7 +27,7 @@ define('IN_INSTALL', TRUE);
 
 
 //版权信息设置
-$cfg_copyright = '© 2015 PHPMYWIND.COM';
+$cfg_copyright = '© 2018 PHPMYWIND.COM';
 
 
 //提示已经安装
@@ -71,7 +71,7 @@ else if($s == 1)
 
 	$exists_array = array('is_writable',
 						  'function_exists',
-						  'mysql_connect');
+						  'mysqli_connect');
 
 	require_once(INSTALL_PATH.'/templates/step_1.html');
 
@@ -110,10 +110,10 @@ else if($s == 3)
 
 
 		//验证数据库
-		$conn = mysql_connect($dbhost, $dbuser, $dbpwd);
+		$conn = mysqli_connect($dbhost, $dbuser, $dbpwd);
 		if($conn)
 		{
-			if(mysql_get_server_info() < '4.0')
+			if(mysqli_get_server_version($conn) < '4.0')
 			{
 				echo '<script>$("#install").append("检测到您的数据库版本过低，请更新！");</script>';
 				exit();
@@ -121,11 +121,11 @@ else if($s == 3)
 
 
 			//查询数据库
-			$res = mysql_query('show Databases');
+			$res = mysqli_query($conn,'show Databases');
 
 
 			//遍历所有数据库，存入数组
-			while($row = mysql_fetch_array($res))
+			while($row = mysqli_fetch_array($res))
 			{
 				$dbname_arr[] = $row['Database'];
 			}
@@ -134,7 +134,7 @@ else if($s == 3)
 			//检查数据库是否存在，没有则创建数据库
 			if(!in_array(trim($dbname), $dbname_arr))
 			{
-				if(!mysql_query("CREATE DATABASE `".$dbname."`"))
+				if(!mysqli_query($conn,"CREATE DATABASE `".$dbname."`"))
 				{
 					echo '<script>$("#install").append("创建数据库失败，请检查权限或联系管理员！");</script>';
 					exit();
@@ -143,7 +143,7 @@ else if($s == 3)
 
 
 			//数据库创建完成，开始连接
-			mysql_select_db($dbname, $conn);
+			mysqli_select_db($conn, $dbname);
 
 
 			//取出conn.inc模板内容
@@ -181,7 +181,7 @@ else if($s == 3)
 			flush();
 
 			//设置数据库状态
-			mysql_query("SET NAMES 'utf8', character_set_client=binary, sql_mode='', interactive_timeout=3600;");
+			mysqli_query($conn,"SET NAMES 'utf8', character_set_client=binary, sql_mode='', interactive_timeout=3600;");
 
 
 			//创建表结构
@@ -195,28 +195,29 @@ else if($s == 3)
 
 
 			$querys = explode(';', ClearBOM($tbstruct));
+
+
 			foreach($querys as $q)
 			{
 				if(trim($q) == '') continue;
-				mysql_query(str_replace('#@__', $tbpre, trim($q)).';');
+				mysqli_query($conn,str_replace('#@__', $tbpre, trim($q)).';');
 			}
-
 			echo '<script>$("#install").append("数据库结构导入完成！<br />");</script>';
 			ob_flush();
 			flush();
 
 
 			//创建管理组
-			mysql_query("INSERT INTO `".$tbpre."admingroup` VALUES('1','超级管理员','超级管理员组','1','true');");
-			mysql_query("INSERT INTO `".$tbpre."admingroup` VALUES('2','站点管理员','站点管理员组','1','true');");
-			mysql_query("INSERT INTO `".$tbpre."admingroup` VALUES('3','文章发布员','文章发布员组','1','true');");
+			mysqli_query($conn,"INSERT INTO `".$tbpre."admingroup` VALUES('1','超级管理员','超级管理员组','1','true');");
+			mysqli_query($conn,"INSERT INTO `".$tbpre."admingroup` VALUES('2','站点管理员','站点管理员组','1','true');");
+			mysqli_query($conn,"INSERT INTO `".$tbpre."admingroup` VALUES('3','文章发布员','文章发布员组','1','true');");
 			echo '<script>$("#install").append("管理组信息导入完成！<br />");</script>';
 			ob_flush();
 			flush();
 
 
 			//创建管理员
-			mysql_query("INSERT INTO `".$tbpre."admin` VALUES('1','".$username."','".md5(md5($password))."','','0','','1','true','127.0.0.1','".time()."');");
+			mysqli_query($conn,"INSERT INTO `".$tbpre."admin` VALUES('1','".$username."','".md5(md5($password))."','','0','','1','true','127.0.0.1','".time()."');");
 			echo '<script>$("#install").append("管理员信息导入完成！<br />");</script>';
 			ob_flush();
 			flush();
@@ -321,7 +322,7 @@ else if($s == 3)
 			foreach($querys as $q)
 			{
 				if(trim($q) == '') continue;
-				mysql_query(str_replace('#@__', $tbpre, trim($q)).';');
+				mysqli_query($conn,str_replace('#@__', $tbpre, trim($q)).';');
 			}
 
 			echo '<script>$("#install").append("网站数据导入完成！<br />");</script>';
@@ -334,8 +335,8 @@ else if($s == 3)
 			flock($fp, 3);
 			fwrite($fp, '<?php	if(!defined(\'IN_PHPMYWIND\')) exit(\'Request Error!\');'."\r\n\r\n");
 
-			$res = mysql_query("SELECT `varname`,`vartype`,`varvalue`,`vargroup` FROM `".$tbpre."webconfig` ORDER BY orderid ASC");
-			while($row = mysql_fetch_array($res))
+			$res = mysqli_query($conn,"SELECT `varname`,`vartype`,`varvalue`,`vargroup` FROM `".$tbpre."webconfig` ORDER BY orderid ASC");
+			while($row = mysqli_fetch_array($res))
 			{
 				//强制去掉 '
 				//强制去掉最后一位 /
@@ -377,7 +378,7 @@ else if($s == 3)
 					{
 						$line = trim(fgets($fp, 512*1024));
 						if($line == '') continue;
-						mysql_query(str_replace('#@__', $tbpre, trim($line)));
+						mysqli_query($conn, str_replace('#@__', $tbpre, trim($line)));
 					}
 					fclose($fp);
 				}
@@ -416,7 +417,7 @@ else if($s == 15271)
 	$dbuser = isset($_GET['dbuser']) ? $_GET['dbuser'] : '';
 	$dbpwd  = isset($_GET['dbpwd'])  ? $_GET['dbpwd']  : '';
 
-	if(mysql_connect($dbhost, $dbuser, $dbpwd))
+	if(mysqli_connect($dbhost, $dbuser, $dbpwd))
 		echo 'true';
 	else
 		echo 'false';

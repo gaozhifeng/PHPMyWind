@@ -58,13 +58,24 @@ switch($infotype)
 //添加自定义字段
 if($action == 'add')
 {
-	$r = $dosql->GetOne("SELECT id FROM `#@__diyfield` WHERE fieldname='$fieldname' AND infotype='$infotype'");
+    $r = $dosql->GetOne("SELECT id FROM `#@__diyfield` WHERE fieldname='$fieldname' AND infotype='$infotype'");
 	if(!empty($r['id']))
 	{
 		ShowMsg("该字段名称已经存在！",'-1');
 		exit();
 	}
-
+    $r = $dosql->GetOne("SELECT * FROM `#@__diymodel` WHERE `id`=$infotype");
+    $dosql->Execute("SHOW COLUMNS FROM `".$r['modeltbname']."`");
+    $arr = array();
+    while($row = $dosql->GetArray())
+    {
+        $arr[]=$row['Field'];
+    }
+    if(in_array($fieldname, $arr))
+    {
+        ShowMsg("该字段名称已经默认创建或已存在！",'-1');
+        exit();
+    }
 	//此类需要指定类型
 	if($fieldtype == 'radio' or $fieldtype == 'checkbox' or $fieldtype == 'select' or $fieldtype == 'file')
 	{

@@ -60,7 +60,7 @@
 				<div class="title" onclick="DisplayMenu('leftmenu05');" title="点击切换显示或隐藏"> 界面模板管理 </div>
 				<div id="leftmenu05" style="display:none;"> <a href="nav.php" target="main">导航菜单设置</a> <a href="diymenu.php" target="main">自定义菜单项</a>
 					<div class="hr_1"> </div>
-					<a href="mobile.php" target="main">手机网站设置</a> <a href="editfile.php" target="main">默认模板管理</a>
+					<a href="mobile.php" target="main">手机网站设置</a>
 				</div>
 			</div>
 			<div class="hr_5"></div>

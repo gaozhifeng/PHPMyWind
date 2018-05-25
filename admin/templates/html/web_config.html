@@ -33,21 +33,6 @@ function UserThisLoginBg(str)
 		$("#loginbgimg_prew").attr("src",str);
 	}
 }
-
-function DelThisLoginBg(str)
-{
-	$.ajax({
-		url : "ajax_do.php?action=delloginbg&delloginbg="+str,
-		type: 'get',
-		dataType:'html',
-		beforeSend:function(){},
-		success:function(data){
-			if(data){
-				$("div[rel='"+str+"']").remove();
-			}
-		}
-	});
-}
 </script>
 </head>
 <body>
@@ -318,7 +303,7 @@ require_once($manageui_inc);
 						if($filename != '.' && $filename != '..' && !is_dir($dir.$filename))
 						{
 							$loginBg = 'templates/images/loginbg/'.$filename;
-							echo '<div rel="'.$loginBg.'"><span class="selimg"><a href="javascript:;" onclick="UserThisLoginBg(\''.$loginBg.'\')"><img src="'.$loginBg.'" width="244" /></a></span><a href="javascript:;" onclick="UserThisLoginBg(\''.$loginBg.'\')">使用</a> - <a href="javascript:;" onclick="DelThisLoginBg(\''.$loginBg.'\')">删除</a></div>';
+							echo '<div rel="'.$loginBg.'"><span class="selimg"><a href="javascript:;" onclick="UserThisLoginBg(\''.$loginBg.'\')"><img src="'.$loginBg.'" width="244" /></a></span><a href="javascript:;" onclick="UserThisLoginBg(\''.$loginBg.'\')">使用</a></div>';
 						}
 					}
 					closedir($handler);

@@ -1,5 +1,4 @@
-﻿;
-DROP TABLE IF EXISTS `#@__admanage`;
+﻿DROP TABLE IF EXISTS `#@__admanage`;
 
 CREATE TABLE `#@__admanage` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '信息id',

@@ -98,20 +98,6 @@ if($action == 'selpriv')
 }
 
 
-//网站信息配置
-//删除登录背景
-if($action == 'delloginbg')
-{
-	if(isset($delloginbg))
-	{
-		unlink(dirname(__FILE__).'/'.$delloginbg);
-	}
-
-	echo TRUE;
-	exit();
-}
-
-
 //修改单页信息
 //单页二级类别
 if($action == 'infomaintype')

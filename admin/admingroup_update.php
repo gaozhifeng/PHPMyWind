@@ -140,9 +140,7 @@ $row = $dosql->GetOne("SELECT * FROM `#@__admingroup` WHERE `id`=$id");
 					<input type="checkbox" name="model[]" value="diymenu" <?php echo GetModelPriv('diymenu'); ?> />
 					自定义菜单项</span> <span>
 					<input type="checkbox" name="model[]" value="mobile" <?php echo GetModelPriv('mobile'); ?> />
-					手机网站设置</span> <span>
-					<input type="checkbox" name="model[]" value="editfile" <?php echo GetModelPriv('editfile'); ?> />
-					默认模板设置</span></div>
+					手机网站设置</span></div>
 				<div class="purviewTitle"><strong>帮助与更新</strong></div>
 				<div class="purviewList"> <span>
 					<input type="checkbox" name="model[]" value="syscount" <?php echo GetModelPriv('syscount'); ?> />

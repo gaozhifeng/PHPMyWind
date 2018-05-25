@@ -85,7 +85,7 @@ if($action == 'add')
 	   is_array($picarr_txt))
 	{
 		$picarrNum = count($picarr);
-		$picarrTmp = '';
+		$picarrTmp = array();
 
 		for($i=0;$i<$picarrNum;$i++)
 		{
@@ -337,8 +337,7 @@ else if($action == 'update')
 	   is_array($picarr_txt))
 	{
 		$picarrNum = count($picarr);
-		$picarrTmp = '';
-
+        $picarrTmp = array();
 		for($i=0;$i<$picarrNum;$i++)
 		{
 			$picarrTmp[] = $picarr[$i].','.$picarr_txt[$i];
