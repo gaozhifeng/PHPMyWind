@@ -961,7 +961,7 @@ else if($a == 'binding')
 	//初始化参数
 	$username = empty($username) ? '' : $username;
 	$password = empty($password) ? '' : md5(md5($password));
-
+    $sql = '';
 
 	//验证输入数据
 	if($username == '' or $password == '')

@@ -1,4 +1,6 @@
-<?php	if(!defined('IN_MOBILE')) exit('Request Error!'); ?>
+<?php	if(!defined('IN_MOBILE')) exit('Request Error!');
+$tbname = '';
+?>
 <!DOCTYPE html>
 <html>
 <head>
