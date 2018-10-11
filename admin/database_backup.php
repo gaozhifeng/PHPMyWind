@@ -8,7 +8,7 @@ define('IN_BKUP', TRUE);
 //初始化变量
 $action = isset($action) ? $action : 'export';
 $dopost = isset($dopost) ? $dopost : '';
-$tbname = basename(isset($tbname) ? $tbname : '');
+$tbname = isset($tbname) ? $tbname : '';
 $backup_dir = PHPMYWIND_BACKUP.'/';
 
 ?>
