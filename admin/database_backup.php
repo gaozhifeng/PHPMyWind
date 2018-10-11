@@ -8,8 +8,14 @@ define('IN_BKUP', TRUE);
 //初始化变量
 $action = isset($action) ? $action : 'export';
 $dopost = isset($dopost) ? $dopost : '';
+$dirname = isset($dirname) ? $dirname : '';
 $tbname = isset($tbname) ? $tbname : '';
 $backup_dir = PHPMYWIND_BACKUP.'/';
+
+while (strpos($dirname, '..') !== FALSE)
+{
+    $dirname = str_replace('..', '.', $dirname);//防止跨目录
+}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -173,7 +179,7 @@ switch($action)
 		//删除备份目录
 		else if($dopost == 'deldir')
 		{
-			$backup_file = $backup_dir.$tbname.'/';
+			$backup_file = $backup_dir.basename($tbname).'/';
 
 			if(!file_exists($backup_file))
 			{
@@ -196,7 +202,7 @@ switch($action)
 
 			for($i=0; $i<count($tbname); $i++)
 			{
-				$backup_file = $backup_dir.$tbname[$i].'/';
+				$backup_file = $backup_dir.basename($tbname).'/';
 				if(file_exists($backup_file))
 				{
 					DelDataDir($backup_file);
@@ -212,7 +218,7 @@ switch($action)
 		//删除.sql文件
 		else if($dopost == 'del')
 		{
-			$backup_file = $backup_dir.$dirname.'/'.$tbname;
+			$backup_file = $backup_dir.$dirname.'/'.basename($tbname);
 
 			if(!file_exists($backup_file))
 			{
@@ -235,7 +241,7 @@ switch($action)
 
 			for($i=0; $i<count($tbname); $i++)
 			{
-				$backup_file = $backup_dir.$dirname.'/'.$tbname[$i];
+				$backup_file = $backup_dir.$dirname.'/'.basename($tbname[$i]);
 				if(file_exists($backup_file))
 				{
 					unlink($backup_file);
