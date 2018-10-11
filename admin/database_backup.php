@@ -202,7 +202,7 @@ switch($action)
 
 			for($i=0; $i<count($tbname); $i++)
 			{
-				$backup_file = $backup_dir.$tbname[$i].'/';
+				$backup_file = $backup_dir.basename($tbname[$i]).'/';
 				if(file_exists($backup_file))
 				{
 					DelDataDir($backup_file);
