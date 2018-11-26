@@ -171,7 +171,7 @@ a.reload{color: #fff;}
 .progress-bar{height:20px;background:#0099E3;}
 .state{color:#fff;z-index:999}
 
-.footer{position: absolute;right:10px;bottom:30px}
+.footer{float: right;margin:10px;}
 .btn-hover { background-color: #d5e1f2;border: 1px solid #eee;margin:10px;background:#fff;color:#000;margin-bottom:0}
 .d5e1f2{border-color:#d5e1f2}
 </style>
@@ -347,7 +347,7 @@ function go_url(url){
 			url = url_arr[key];   
 		}
 	if(!(typeof(url) == "undefined")){
-		 parent.$('#<?php echo $area;?>').val(url);
+		 parent.$('#<?php echo $input;?>').val(url);
 	}
     parent.layer.close(index);
 }

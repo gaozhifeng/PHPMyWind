@@ -6,7 +6,8 @@
 <title>添加商品品牌</title>
 <link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="templates/js/jquery.min.js"></script>
-<script type="text/javascript" src="templates/js/getuploadify.js"></script>
+<script type="text/javascript" src="plugin/layer/layer.js"></script><!--弹窗js---->
+<script type="text/javascript" src="plugin/uploader.js?v1"></script><!--上传js 必须在弹窗下面---->
 <script type="text/javascript" src="templates/js/checkf.func.js"></script>
 </head>
 <body>

@@ -7,10 +7,10 @@
 <link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="templates/js/jquery.min.js"></script>
 <script type="text/javascript" src="templates/js/checkf.func.js"></script>
-<script type="text/javascript" src="templates/js/getuploadify.js"></script>
+<script type="text/javascript" src="plugin/layer/layer.js"></script><!--弹窗js---->
+<script type="text/javascript" src="plugin/uploader.js?v1"></script><!--上传js 必须在弹窗下面---->
 <script type="text/javascript" src="plugin/calendar/calendar.js"></script>
-<script type="text/javascript" src="editor/kindeditor-min.js"></script>
-<script type="text/javascript" src="editor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script><!--编辑器-->
 </head>
 <body>
 <div class="formHeader"> <span class="title">添加碎片数据</span> <a href="javascript:location.reload();" class="reload">刷新</a> </div>
@@ -35,19 +35,9 @@
 		<tr>
 			<td height="298" align="right">详细内容：</td>
 			<td><textarea name="content" id="content" class="kindeditor"></textarea>
-				<script>
-				var editor;
-				KindEditor.ready(function(K) {
-					editor = K.create('textarea[name="content"]', {
-						allowFileManager : true,
-						width:'667px',
-						height:'280px',
-						extraFileUploadParams : {
-							sessionid :  '<?php echo session_id(); ?>'
-						}
-					});
-				});
-				</script></td>
+				  <script type="text/javascript">
+                                    CKEDITOR.replace('content');
+                             </script></td>
 		</tr>
 		<tr class="nb">
 			<td height="40" align="right">更新时间：</td>

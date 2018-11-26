@@ -5,11 +5,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>修改单页信息</title>
 <link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="templates/js/jquery.min.js"></script>
-<script type="text/javascript" src="templates/js/getuploadify.js"></script>
+
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script><!--编辑器-->
+<script type="text/javascript" src="templates/js/jquery.min.js"></script><!--jq必须---->
+<script type="text/javascript" src="plugin/layer/layer.js"></script><!--弹窗js---->
+<script type="text/javascript" src="plugin/uploader.js?v1"></script><!--上传js 必须在弹窗下面---->
 <script type="text/javascript" src="templates/js/checkf.func.js"></script>
-<script type="text/javascript" src="editor/kindeditor-min.js"></script>
-<script type="text/javascript" src="editor/lang/zh_CN.js"></script>
 <script type="text/javascript" src="plugin/calendar/calendar.js"></script>
 <script type="text/javascript">
 
@@ -92,19 +93,9 @@ $posttime = isset($row['posttime']) ? GetDateTime($row['posttime']) : GetDateTim
 		<tr>
 			<td height="304" align="right">内　　容：</td>
 			<td><textarea name="content" id="content" class="kindeditor"><?php echo $content; ?></textarea>
-				<script>
-				var editor;
-				KindEditor.ready(function(K) {
-					editor = K.create('textarea[name="content"]', {
-						allowFileManager : true,
-						width:'667px',
-						height:'280px',
-						extraFileUploadParams : {
-							sessionid :  '<?php echo session_id(); ?>'
-						}
-					});
-				});
-				</script></td>
+				  <script type="text/javascript">
+                                    CKEDITOR.replace('content');
+                                  </script></td>
 		</tr>
 		<tr>
 			<td height="40" align="right">缩略图片：</td>

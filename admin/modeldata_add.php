@@ -24,19 +24,15 @@ else
 <title>添加<?php echo $r['modeltitle']; ?></title>
 <link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="templates/js/jquery.min.js"></script>
-<script type="text/javascript" src="templates/js/getuploadify.js"></script>
+<script type="text/javascript" src="plugin/layer/layer.js"></script><!--弹窗js---->
+<script type="text/javascript" src="plugin/uploader.js?v1"></script><!--上传js 必须在弹窗下面---->
 <script type="text/javascript" src="templates/js/checkf.func.js"></script>
 <script type="text/javascript" src="templates/js/getjcrop.js"></script>
 <script type="text/javascript" src="templates/js/getinfosrc.js"></script>
 <script type="text/javascript" src="plugin/colorpicker/colorpicker.js"></script>
 <script type="text/javascript" src="plugin/calendar/calendar.js"></script>
-<script type="text/javascript" src="editor/kindeditor-min.js"></script>
-<script type="text/javascript" src="editor/lang/zh_CN.js"></script>
-<script>
-//自定义字段通过AJAX来输出时需要提前声明
-var editor;
-KindEditor.ready(function(K) { });
-</script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script><!--编辑器-->
+
 </head>
 <body>
 <?php

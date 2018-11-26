@@ -6,14 +6,14 @@
 <title>添加软件信息</title>
 <link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="templates/js/jquery.min.js"></script>
-<script type="text/javascript" src="templates/js/getuploadify.js"></script>
+<script type="text/javascript" src="plugin/layer/layer.js"></script><!--弹窗js---->
+<script type="text/javascript" src="plugin/uploader.js?v1"></script><!--上传js 必须在弹窗下面---->
 <script type="text/javascript" src="templates/js/checkf.func.js"></script>
 <script type="text/javascript" src="templates/js/getjcrop.js"></script>
 <script type="text/javascript" src="templates/js/getinfosrc.js"></script>
 <script type="text/javascript" src="plugin/colorpicker/colorpicker.js"></script>
 <script type="text/javascript" src="plugin/calendar/calendar.js"></script>
-<script type="text/javascript" src="editor/kindeditor-min.js"></script>
-<script type="text/javascript" src="editor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script><!--编辑器-->
 </head>
 <body>
 <div class="formHeader"> <span class="title">软件信息添加</span> <a href="javascript:location.reload();" class="reload">刷新</a> </div>
@@ -185,19 +185,9 @@
 		<tr>
 			<td height="340" align="right">详细内容：</td>
 			<td><textarea name="content" id="content" class="kindeditor"></textarea>
-				<script>
-				var editor;
-				KindEditor.ready(function(K) {
-					editor = K.create('textarea[name="content"]', {
-						allowFileManager : true,
-						width:'667px',
-						height:'280px',
-						extraFileUploadParams : {
-							sessionid :  '<?php echo session_id(); ?>'
-						}
-					});
-				});
-				</script>
+			    <script type="text/javascript">
+                                        CKEDITOR.replace('content');
+                            </script>
 				<div class="editToolbar">
 					<input type="checkbox" name="remote" id="remote" value="true" />
 					下载远程图片和资源

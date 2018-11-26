@@ -7,8 +7,7 @@
 <link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="templates/js/jquery.min.js"></script>
 <script type="text/javascript" src="templates/js/checkf.func.js"></script>
-<script type="text/javascript" src="editor/kindeditor-min.js"></script>
-<script type="text/javascript" src="editor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script><!--编辑器-->
 </head>
 <body>
 <div class="formHeader"> <span class="title">添加招聘信息</span> <a href="javascript:location.reload();" class="reload">刷新</a> </div>

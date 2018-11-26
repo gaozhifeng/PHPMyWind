@@ -19,27 +19,22 @@ function GetUploadify(frame,title,type,desc,num,size,input,area)
 	layer.open({
 	  title:title,
 	  type: 2,
-	  area: ['680px', '430px'],
+	  area: ['576px', '430px'],
 	  fixed: false, //不固定
 	  maxmin: true,
 	  content: 'ckeditor/plugins/multiimg/dialogs/WebUploader/image.php?frame='+ frame +'&type='+ type +'&desc='+ encodeURI(desc) +'&num='+ num +'&size='+ size +'&frame='+ frame +'&input='+ input +'&area='+ area,
 	});
 }
 
-function getMyPath(){
-    var scriptSrc = document.getElementsByTagName('script')[document.getElementsByTagName('script').length -1].src;
-    var jsName = scriptSrc.split('/')[scriptSrc.split('/').length-1];
-    return scriptSrc.replace(jsName,'');
-}
-/* 当前页面所在目录路径
-			* 当前页面地址：http://www.abc.com/shop/page.php?id=123&s=142231233
-			* 结果：http://www.abc.com/shop
-*/
-function GetUrlPath(){
-　　　　var url = document.location.toString();				
-　　　　if(url.indexOf("/") != -1){
-		url = url.substring(0,  url.lastIndexOf("/")) ;
-　　　　}
-　　　　return url;
+/*
+ * 删除组图input
+ *
+ * @access   public
+ * @val      string  删除的图片input
+ */
+
+function ClearPicArr(val)
+{
+	$("li[rel='"+ val +"']").remove();
 }
 
