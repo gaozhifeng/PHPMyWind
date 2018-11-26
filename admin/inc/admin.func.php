@@ -616,7 +616,7 @@ function GetRemPic($url)
  * @param   $sptag   string  分页标示符
  * @return  $body    string  设置分页符的内容
 */
-function ContAutoPage($body, $spsize, $sptag='<hr style="page-break-after:always;" class="ke-pagebreak" />')
+function ContAutoPage($body, $spsize, $sptag='<div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>')
 {
 	//判断是否符合分页条件
     if(strlen($body) < $spsize) return $body;
@@ -942,7 +942,7 @@ function GetDiyField($type='',$id=0,$row='')
 			else if($r['fieldtype'] == 'mediumtext')
 			{
 				$reStr .= '<textarea name="'.$r['fieldname'].'" id="'.$r['fieldname'].'" class="kindeditor">'.$fieldvalue.'</textarea>';
-				$reStr .= '<script type="text/javascript">var editor;KindEditor.ready(function(K) {editor = K.create(\'textarea[name="'.$r['fieldname'].'"]\', {allowFileManager:true,width:\'667px\',height:\'280px\',extraFileUploadParams:{sessionid:\''.session_id().'\'}});});</script>';
+				$reStr .=' <script type="text/javascript">CKEDITOR.replace("'.$r['fieldname'].'");</script>';
 			}
 
 			$reStr .= '</td></tr></table>';

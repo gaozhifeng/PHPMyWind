@@ -58,7 +58,7 @@ function GetContPage($content)
 
 	//设定分页标签
 	$contstr  = '';
-	$nextpage = '<hr style="page-break-after:always;" class="ke-pagebreak" />';
+	$nextpage = '<div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>';
 
 
 	if(strpos($content, $nextpage))
