@@ -18,7 +18,7 @@ $verifyToken = md5('unique_salt'.$timestamp);
 	require_once(PHPMYWIND_DATA.'/httpfile/upload.class.php');
 
 //有上传文件时
-if(!empty($_FILES && $token==$verifyToken))
+if(!empty($_FILES) && $token==$verifyToken)
 {
 	if(isset($type)){ //区别编辑器批量上传
 		$upload_info = UploadFile('file', $iswatermark);
