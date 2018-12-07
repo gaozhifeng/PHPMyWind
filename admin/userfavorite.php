@@ -58,7 +58,7 @@
 						$tbname = '';
 				}
 
-				$r = $dosql->GetOne("SELECT * FROM `#@__$tbname` WHERE `id`=".$row['aid']."");
+				$r = $dosql->GetOne("SELECT * FROM `$tbname` WHERE `id`=".$row['aid']."");
 				?>
 				<a href="<?php echo $row['link']; ?>" target="_blank" title="点击访问"><?php echo $r['title']; ?></a></td>
 			<td><?php echo $row['molds']; ?></td>
