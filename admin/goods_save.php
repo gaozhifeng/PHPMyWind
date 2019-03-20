@@ -13,7 +13,8 @@ person: Feng
 $tbname = '#@__goods';
 $gourl  = 'goods.php';
 $action = isset($action) ? $action : '';
-
+$typeid = empty($typeid) ? 1 : intval($typeid);
+$brandid = empty($brandid) ? 1 : intval($brandid);
 
 //添加商品信息
 if($action == 'add')
@@ -107,7 +108,7 @@ if($action == 'add')
 		$attrids = count($attrid);
 		for($i=0; $i<$attrids; $i++)
 		{
-			$attrstr .= '"'.$attrid[$i].'"=>'.'"'.$attrvalue[$i].'"';
+			$attrstr .= '"'.intval($attrid[$i]).'"=>'.'"'.htmlspecialchars($attrvalue[$i]).'"';
 			if($i < $attrids-1)
 			{
 				$attrstr .= ',';
@@ -402,7 +403,7 @@ else if($action == 'update')
 		$attrids = count($attrid);
 		for($i=0; $i<$attrids; $i++)
 		{
-			$attrstr .= '"'.$attrid[$i].'"=>'.'"'.$attrvalue[$i].'"';
+			$attrstr .= '"'.intval($attrid[$i]).'"=>'.'"'.htmlspecialchars($attrvalue[$i]).'"';
 			if($i < $attrids-1)
 			{
 				$attrstr .= ',';

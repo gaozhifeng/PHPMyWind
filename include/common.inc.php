@@ -89,8 +89,8 @@ $cfg_media_dir = PHPMYWIND_UPLOAD.'/media';
 
 
 //系统版本号
-$cfg_vernum  = '5.3 Beta';
-$cfg_vertime = '20150913221909';
+$cfg_vernum  = '5.6 Beta';
+$cfg_vertime = '20190320135906';
 
 
 //设置默认时区

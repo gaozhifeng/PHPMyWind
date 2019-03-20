@@ -104,7 +104,7 @@
 	</div>
 </div>
 <div class="bGradient"></div>
-<div class="copyright"> © 2015 <a href="http://phpMyWind.com/" target="_blank">phpMyWind.com</a><br />
+<div class="copyright"> © 2019 <a href="http://phpMyWind.com/" target="_blank">phpMyWind.com</a><br />
 	All Rights Reserved. </div>
 <div class="tabMenu">
 	<a href="left_menu_user.php" title="切换到功能菜单" class="name"></a>

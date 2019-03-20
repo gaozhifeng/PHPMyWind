@@ -277,6 +277,7 @@ if($action == 'goodsattr')
 if($action == 'recycel' or $action == 'reset' or $action == 'del' or
    $action == 'resetall' or $action == 'delall' or $action == 'empty')
 {
+
 	if(isset($type))
 	{
 		$tbname = '#@__'.$type;
@@ -302,12 +303,26 @@ if($action == 'recycel' or $action == 'reset' or $action == 'del' or
 			break;
 
 		case 'resetall':
+			$idsarray = explode(',',$ids);
+			$idsstr = '';
+			for($i=0;$i<count($idsarray);$i++)
+			{
+				$idsstr .= intval($idsarray[$i]).',';
+			}
+			$idsstr = rtrim($idsstr, ',');
 			$sql = "UPDATE `$tbname` SET delstate='', deltime=0 WHERE id IN ($ids)";
 			$dosql->ExecNoneQuery($sql);
 			break;
 
 		case 'delall':
-			$sql = "DELETE FROM `$tbname` WHERE id IN ($ids)";
+			$idsarray = explode(',',$ids);
+			$idsstr = '';
+			for($i=0;$i<count($idsarray);$i++)
+			{
+				$idsstr .= intval($idsarray[$i]).',';
+			}
+			$idsstr = rtrim($idsstr, ',');
+			$sql = "DELETE FROM `$tbname` WHERE id IN ($idsstr)";
 			$dosql->ExecNoneQuery($sql);
 			break;
 

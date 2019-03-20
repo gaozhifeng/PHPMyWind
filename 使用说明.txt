@@ -22,6 +22,5 @@ Apache + PHP5 + MySQL5 (PHP必须在非安全模式下运行)
 
 三、相关资源
 PHPMyWind 官方主站       http://phpmywind.com
-PHPMyWind 官方论坛       http://phpmywind.com/bbs
 PHPMyWind 新浪微博       http://weibo.com/phpmywind
 PHPMyWind 腾讯微博       http://t.qq.com/phpmywind

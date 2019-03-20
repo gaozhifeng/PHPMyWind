@@ -169,85 +169,6 @@ switch($action)
 			}
 		}
 
-
-		//删除备份目录
-		else if($dopost == 'deldir')
-		{
-			$backup_file = $backup_dir.$tbname.'/';
-
-			if(!file_exists($backup_file))
-			{
-				ShowDataMsg("<span class='red'>没有找到 $tbname 备份目录！</span>",'?action='.$action);
-				exit();
-			}
-			else
-			{
-				DelDataDir($backup_file);
-				ShowDataMsg("<span class='blue'>删除备份目录 $tbname 成功！</span>",'?action='.$action);
-				exit();
-			}
-		}
-
-
-		//删除全部目录
-		else if($dopost == 'deldirall')
-		{
-			$oknum = 0;
-
-			for($i=0; $i<count($tbname); $i++)
-			{
-				$backup_file = $backup_dir.$tbname[$i].'/';
-				if(file_exists($backup_file))
-				{
-					DelDataDir($backup_file);
-					$oknum++;
-				}
-			}
-
-			ShowDataMsg("<span class='blue'>成功删除 $oknum 备份目录！</span>",'?action='.$action);
-			exit();
-		}
-
-
-		//删除.sql文件
-		else if($dopost == 'del')
-		{
-			$backup_file = $backup_dir.$dirname.'/'.$tbname;
-
-			if(!file_exists($backup_file))
-			{
-				ShowDataMsg("<span class='red'>没有找到 $tbname 备份文件！</span>",'?action='.$action.'&dopost=sqldir&tbname='.$dirname);
-				exit();
-			}
-			else
-			{
-				unlink($backup_file);
-				ShowDataMsg("<span class='blue'>删除备份文件 $tbname 成功！</span>",'?action='.$action.'&dopost=sqldir&tbname='.$dirname);
-				exit();
-			}
-		}
-
-
-		//删除全部.sql文件
-		else if($dopost == 'delall')
-		{
-			$oknum = 0;
-
-			for($i=0; $i<count($tbname); $i++)
-			{
-				$backup_file = $backup_dir.$dirname.'/'.$tbname[$i];
-				if(file_exists($backup_file))
-				{
-					unlink($backup_file);
-					$oknum++;
-				}
-			}
-	
-			ShowDataMsg("<span class='blue'>成功删除 $oknum 备份文件！</span>",'?action='.$action.'&dopost=sqldir&tbname='.$dirname);
-			exit();
-		}
-
-
 		//展示.sql文件列表
 		else if($dopost == 'sqldir')
 		{
@@ -423,28 +344,6 @@ function ShowDataMsg($msg, $url_forward='', $ms=1000)
 	require_once('database_message.php');
 }
 
-
-//删除数据文件夹
-function DelDataDir($dirname)
-{
-	global $action;
-	$handler = opendir($dirname);
-
-	while(($fname = readdir($handler)) !== false)
-	{
-		if($fname != '.' && $fname != '..')
-		{
-			if(@!unlink($dirname.$fname))
-			{
-				ShowDataMsg("<span class='red'>删除失败，{$dirname}备份目录中可能还存在其他文件夹，请手动删除！</span>",'?action='.$action,1650);
-				exit();
-			}
-		}
-	}
-
-	closedir($handler);
-	rmdir($dirname);
-}
 ?>
 </body>
 </html>

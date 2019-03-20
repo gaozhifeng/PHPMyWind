@@ -187,9 +187,9 @@ if($dopost == 'backup')
 			for($j=0; $j<=$fsn; $j++)
 			{
 				if($j < $fsn)
-					$line .= "'".RpLine(addslashes($row[$fields[$j]]))."',";
+					$line .= "'".RpLine(addslashes(@$row[$fields[$j]]))."',";
 				else
-					$line .= "'".RpLine(addslashes($row[$fields[$j]]))."');\r\n";
+					$line .= "'".RpLine(addslashes(@$row[$fields[$j]]))."');\r\n";
 			}
 
 			$bakstr .= $line;

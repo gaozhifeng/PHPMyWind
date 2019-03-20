@@ -47,7 +47,7 @@ $(function(){
 	<div class="header"><span class="title">首页</span><a href="javascript:location.reload();" class="reload">刷新</a></div>
 	<div class="news">
 		<div class="title">官方公告</div >
-		<div id="showad"> </div>
+		<div id="showad" style="height: 25px;"> </div>
 	</div>
 </div>
 <div class="homeCont">
@@ -199,7 +199,7 @@ $(function(){
 		?></textarea>
 	</div>
 </div>
-<div class="homeCopy"> 敬请您将在使用中发现的问题或者不适提交给我们，以便改进 <a href="http://phpmywind.com/bbs/" target="_blank" class="feedback">点击提交反馈</a> | <a href="help.php" class="doc">开发帮助</a> </div>
+<div class="homeCopy"> 敬请您将在使用中发现的问题或者不适提交给我们，以便改进 <a href="http://wp.qq.com/wpa/qunwpa?idkey=1775e3584146c89a06f19767df0779718f3437f633937543084917460b741148" title="点击立即加入官方交流群" target="_blank" class="feedback">官方QQ群</a> | <a href="help.php" class="doc">开发帮助</a> </div>
 <?php
 function ShowResult($revalue)
 {

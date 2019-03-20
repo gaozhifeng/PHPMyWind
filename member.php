@@ -657,6 +657,10 @@ else if($a == 'savecomment')
 	$molds = isset($molds) ? intval($molds) : '';
 	$body  = isset($body)  ? htmlspecialchars($body) : '';
 	$link  = isset($_SERVER['HTTP_REFERER']) ? htmlspecialchars($_SERVER['HTTP_REFERER'],ENT_QUOTES) : '';
+    if(preg_match('#^(javascript|<|>|\(|\))#',$link))
+    {
+        echo json_encode(array('403'));
+    }
 
 	if($aid == '' or $molds == '' or $body == '')
 	{

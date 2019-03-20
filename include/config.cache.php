@@ -1,7 +1,7 @@
 <?php	if(!defined('IN_PHPMYWIND')) exit('Request Error!');
 
 $cfg_webname = '我的网站';
-$cfg_weburl = 'http://localhost';
+$cfg_weburl = 'http://phpmywind.net';
 $cfg_webpath = '';
 $cfg_author = '';
 $cfg_generator = 'PHPMyWind CMS';
@@ -12,14 +12,15 @@ $cfg_copyright = 'Copyright © 2015 - 2018 phpMyWind.com All Rights Reserved';
 $cfg_hotline = '400-800-8888';
 $cfg_icp = '';
 $cfg_webswitch = 'Y';
-$cfg_switchshow = '对不起，网站维护，请稍后登录。<br />网站维护期间对您造成的不便，请谅解！';
+$cfg_switchshow = '对不起，网站维护，请稍后登录。br /网站维护期间对您造成的不便，请谅解！';
 $cfg_upload_img_type = 'gif|png|jpg|bmp';
 $cfg_upload_soft_type = 'zip|gz|rar|iso|doc|xls|ppt|wps|txt';
 $cfg_upload_media_type = 'swf|flv|mpg|mp3|rm|rmvb|wmv|wma|wav';
 $cfg_max_file_size = '2097152';
 $cfg_imgresize = 'Y';
 $cfg_countcode = '';
-$cfg_qqcode = '';
+$cfg_qqcode = 'scriptalert(123)/script
+';
 $cfg_mysql_type = 'mysqli';
 $cfg_pagenum = '20';
 $cfg_timezone = '8';
@@ -50,7 +51,7 @@ $cfg_reurl_goods = '{goods}-{cid}-{tid}-{page}.html';
 $cfg_reurl_goodsshow = '{goodsshow}-{cid}-{tid}-{id}-{page}.html';
 $cfg_reurl_vote = '{vote}-{id}.html';
 $cfg_reurl_custom = '{file}.html';
-$cfg_auth_key = '4xeXWiPTeCPWJ7SE';
+$cfg_auth_key = 'pw5jF24ahWaPNRAS';
 $cfg_alipay_uname = '';
 $cfg_alipay_partner = '';
 $cfg_alipay_key = '';
@@ -58,4 +59,5 @@ $cfg_qq_appid = '';
 $cfg_qq_appkey = '';
 $cfg_weibo_appid = '';
 $cfg_weibo_appkey = '';
+$cfg_ceshi = 1.1;
 ?>

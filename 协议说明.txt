@@ -1,6 +1,6 @@
 中文版授权协议 适用于中文用户
 
-版权所有 (c) 2010-2015，PHPMyWind开发团队保留所有权利。
+版权所有 (c) 2010-2019，PHPMyWind开发团队保留所有权利。
 感谢您选择PHPMyWind。希望我们的努力能为您提供一款适用于企业级建站的首先利器。PHPMyWind中文全称为PHPMyWind Web应用开发引擎与内容管理系统，以下简称PHPMyWind。PHPMyWind开发团队为PHPMyWind的开发商，依法独立拥有PHPMyWind版权。
 
 PHPMyWind官方网站为 http://phpmywind.com。

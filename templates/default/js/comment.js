@@ -56,6 +56,11 @@ $(function() {
 					$("#comment").val("说点什么吧...").css("color","#999");
 					return;
 				}
+				else if(jsonobj[0] == 403)
+				{
+					alert("评论失败！请不要尝试XSS！");
+					return;
+				}
 				else
 				{
 					alert("评论失败！");

@@ -7,21 +7,21 @@
 */
 
 //数据库服务器
-$db_host = '';
+$db_host = 'localhost';
 
 //数据库用户名
-$db_user = '';
+$db_user = 'root';
 
 //数据库密码
-$db_pwd = '';
+$db_pwd = 'root';
 
 //数据库名
-$db_name = '';
+$db_name = 'phpmywind_db';
 
 //数据表前缀
-$db_tablepre = '';
+$db_tablepre = 'pmw_';
 
 //数据表编码
-$db_charset = '';
+$db_charset = 'utf8';
 
 ?>

@@ -435,6 +435,13 @@ if($action == 'update')
 {
 	foreach($_POST as $k=>$v)
 	{
+        //强制去掉 ' < > ; /
+        $v = str_replace("'",'',$v);
+        $v = str_replace("<",'',$v);
+        $v = str_replace(">",'',$v);
+        $v = str_replace(";",'',$v);
+        $v = str_replace("/",'',$v);
+
 		//统计代码转义
 		$v = _RunMagicQuotes($v);
 
@@ -470,6 +477,11 @@ if($action == 'add')
 		ShowMsg('布尔变量值必须为\'Y\'或\'N\'！', $gourl);
 		exit();
 	}
+    if($vartype=='number' && is_numeric($varvalue)==false)
+    {
+        ShowMsg('数字变量值必须为数字！', $gourl);
+        exit();
+    }
 
 	if($dosql->GetOne("SELECT `varname` FROM `#@__webconfig` WHERE varname='$varname'"))
 	{
