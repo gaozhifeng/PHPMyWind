@@ -21,10 +21,12 @@ if(substr($method, 0, 1) == '_' ||
 }
 
 
-if(method_exists($connect, $method))
+if(method_exists($connect, $method)){
     $connect->$method();
-else
-    echo '请求的方法['.$method.']未找到';
+}
+else{
+	echo htmlentities('请求的方法['.$method.']未找到',ENT_QUOTES,'UTF-8');
+}
 
 
 //连接类
