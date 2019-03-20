@@ -59,5 +59,4 @@ $cfg_qq_appid = '';
 $cfg_qq_appkey = '';
 $cfg_weibo_appid = '';
 $cfg_weibo_appkey = '';
-$cfg_ceshi = 1.1;
 ?>
