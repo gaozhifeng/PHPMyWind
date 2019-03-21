@@ -87,7 +87,7 @@ $cfg_media_dir = PHPMYWIND_UPLOAD.'/media';
 
 
 //系统版本号
-$cfg_vernum  = '5.6 Beta';
+$cfg_vernum  = '5.6';
 $cfg_vertime = '20190320135906';
 
 
