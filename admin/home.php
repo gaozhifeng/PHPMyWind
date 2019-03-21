@@ -177,7 +177,7 @@ $(function(){
 <div class="homeTeam">
 	<h2 class="title">团队</h2>
 	<ul>
-		<li><strong>程序开发及交互设计：</strong> <i>Feng</i> · <i>Adu</i></li>
+		<li><strong>程序开发及交互设计：</strong> <i>Feng</i> · <i>Ado</i></li>
 		<li><strong>荣誉P粉：</strong> <i>奋斗</i> · <i>老徐</i>· <i>CHurricane</i> · <i>火爆浪子</i> · <i>老A</i> · <i>麦子</i> · <i>静望黄昏</i> · <i>小学生</i></li>
 		<li class="nb"><strong>鸣谢：</strong> <i>兔饭饭</i> · <i>游鱼</i> · <i>螺丝钉</i> · <i>薛</i> · <i>风青云</i> · <i>上杉达也</i> · <i>Xyao</i> · <i>Lucifer</i> · <i>leaves</i> · <i>Long</i></li>
 		<div class="cl"></div>
