@@ -64,11 +64,9 @@ require_once(PHPMYWIND_INC.'/conn.inc.php');     //引入数据库类
 
 
 //引入数据库类
-if($cfg_mysql_type == 'mysqli' &&
-   function_exists('mysqli_init'))
-   require_once(PHPMYWIND_INC.'/mysqli.class.php');
-else
-   require_once(PHPMYWIND_INC.'/mysql.class.php');
+
+require_once(PHPMYWIND_INC.'/mysqli.class.php');
+
 
 
 //引入语言包

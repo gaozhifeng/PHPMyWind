@@ -113,7 +113,7 @@ else if($s == 3)
 		$conn = mysqli_connect($dbhost, $dbuser, $dbpwd);
 		if($conn)
 		{
-			if(mysqli_get_server_version($conn) < '4.0')
+			if(mysqli_get_server_version($conn) < '5.0')
 			{
 				echo '<script>$("#install").append("检测到您的数据库版本过低，请更新！");</script>';
 				exit();
@@ -263,7 +263,6 @@ else if($s == 3)
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_countcode','流量统计代码','1','bstring','','28');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_qqcode','在线QQ　<br />(多个用\",\"分隔)','1','bstring','','29');
 
-			INSERT INTO `#@__webconfig` VALUES('1','cfg_mysql_type','数据库类型(支持mysql和mysqli)','2','string','mysqli','40');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_pagenum','每页显示记录数','2','string','20','41');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_timezone','服务器时区设置','2','string','8','42');
 			INSERT INTO `#@__webconfig` VALUES('1','cfg_mobile','自动跳转手机版','2','bool','Y','43');

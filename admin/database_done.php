@@ -101,8 +101,8 @@ if($dopost == 'backup')
 			{
 				fwrite($fp, "DROP TABLE IF EXISTS `$t`;\r\n\r\n");
 				$dosql->Execute("SHOW CREATE TABLE ".$dosql->db_name.".".$t);
-				$row = $dosql->GetArray('me', MYSQL_BOTH);
-				fwrite($fp, $row[1].";\r\n\r\n");
+				$row = $dosql->GetArray('me', MYSQLI_ASSOC);
+				fwrite($fp, $row['Create Table'].";\r\n\r\n");
 			}
 			fclose($fp);
 
@@ -129,7 +129,7 @@ if($dopost == 'backup')
 	else
 	{
 		$fsn         = 0;  //字段数
-		$fields      = ''; //字段名称
+		$fields      = array(); //字段名称
 		$bakstr      = ''; //备份字符串
 		$nowtable    = isset($nowtable) ? $nowtable : ''; //当前表
 		$intable     = "INSERT INTO `$nowtable` VALUES("; //备份插入字符串
@@ -138,14 +138,15 @@ if($dopost == 'backup')
 
 		//分析表里的字段信息
 		$j = 0;
+
 		$dosql->GetTableFields($nowtable);
 		while($r = $dosql->GetFieldObject())
 		{
+
 			$fields[$j] = trim($r->name);
 			$j++;
 		}
 		$fsn = $j-1;
-
 
 		//读取表的内容
 		$m = 0;
