@@ -435,12 +435,12 @@ if($action == 'update')
 {
 	foreach($_POST as $k=>$v)
 	{
-        //强制去掉 ' < > ; /
-        $v = str_replace("'",'',$v);
-        $v = str_replace("<",'',$v);
-        $v = str_replace(">",'',$v);
-        $v = str_replace(";",'',$v);
-        $v = str_replace("/",'',$v);
+            //强制去掉 ' < > ; /
+            $v = str_replace("'",'',$v);
+            $v = str_replace("<",'',$v);
+            $v = str_replace(">",'',$v);
+            $v = str_replace(";",'',$v);
+            //$v = str_replace("/",'',$v); //取消
 
 		//统计代码转义
 		$v = _RunMagicQuotes($v);
