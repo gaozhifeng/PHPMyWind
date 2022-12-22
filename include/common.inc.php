@@ -20,23 +20,19 @@ define('IN_PHPMYWIND', TRUE);
 //检查外部传递的值并转义
 function _RunMagicQuotes(&$svar)
 {
-	//PHP5.4已经将此函数移除
-    if(@!get_magic_quotes_gpc())
+    if(is_array($svar))
     {
-        if(is_array($svar))
+        foreach($svar as $_k => $_v) $svar[$_k] = _RunMagicQuotes($_v);
+    }
+    else
+    {
+        if(strlen($svar)>0 &&
+           preg_match('#^(cfg_|GLOBALS|_GET|_POST|_SESSION|_COOKIE)#',$svar))
         {
-            foreach($svar as $_k => $_v) $svar[$_k] = _RunMagicQuotes($_v);
+            exit('不允许请求的变量值!');
         }
-        else
-        {
-            if(strlen($svar)>0 &&
-			   preg_match('#^(cfg_|GLOBALS|_GET|_POST|_SESSION|_COOKIE)#',$svar))
-            {
-				exit('不允许请求的变量值!');
-            }
 
-            $svar = addslashes($svar);
-        }
+        $svar = addslashes($svar);
     }
     return $svar;
 }
