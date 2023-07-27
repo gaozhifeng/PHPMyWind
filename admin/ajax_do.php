@@ -153,6 +153,16 @@ if($action == 'infoclass')
 	else
 		$type = '';
 
+        $tables = array(
+            0 => '#@__info',
+            1 => '#@__infolist',
+            2 => '#@__infoimg',
+            3 => '#@__soft',
+            4 => '#@__goods',
+        );
+        if ($row && ($table = $tables[$type])) {
+            $row = $dosql->GetOne("SELECT * FROM `$table` WHERE `id`=$row");
+        }
 
 	echo GetDiyField($type, $id, $row);
 	exit();
