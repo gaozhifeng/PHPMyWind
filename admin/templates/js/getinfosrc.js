@@ -10,8 +10,9 @@ person: Feng
 $(function(){
 	$("#classid").change(function(){
 		var v = $(this).val();
+		var row = $('#id').val();
 		$.ajax({
-			url : "ajax_do.php?action=infoclass&id="+v+"&row=",
+			url : "ajax_do.php?action=infoclass&id="+v+"&row="+row,
 			type:'get',
 			dataType:'html',
 			beforeSend:function(){},
